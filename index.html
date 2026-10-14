@@ -20,13 +20,17 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png?v=2">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
 
-  <!-- Google Fonts: Outfit (Titulares de Lujo) & Plus Jakarta Sans (Cuerpo Ejecutivo) -->
+  <!-- Preload LCP Hero Image (Optimizado para Móvil y Desktop) -->
+  <link rel="preload" as="image" href="assets/images/hero_textil_bg_mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/hero_textil_bg.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+
+  <!-- Google Fonts: Optimizado para máxima velocidad de render FCP/LCP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Estilos Principales -->
-  <link rel="stylesheet" href="assets/css/style.css?v=3.8">
+  <link rel="stylesheet" href="assets/css/style.css?v=3.9">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -77,7 +81,7 @@
   <header class="navbar-header" id="navbar">
     <nav class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="Upernikao Textil Inicio">
-        <img src="assets/images/UT- HERO-clean.png" alt="Upernikao Textil Logo" class="logo-img logo-light-nav">
+        <img src="assets/images/UT- HERO-clean.webp" alt="Upernikao Textil Logo" class="logo-img logo-light-nav" width="220" height="38">
       </a>
 
       <!-- Botón Hamburguesa Móvil -->
@@ -110,7 +114,11 @@
   <!-- ── HERO SECTION: TALLER DE ALTA CONFECCIÓN B2B ── -->
   <section class="hero-section" id="hero">
     <div class="hero-bg-wrapper">
-      <img src="assets/images/hero_textil_bg.jpg" alt="Taller de confección Upernikao Textil" class="hero-bg-img">
+      <picture class="hero-bg-picture">
+        <source media="(max-width: 768px)" srcset="assets/images/hero_textil_bg_mobile.webp" type="image/webp">
+        <source srcset="assets/images/hero_textil_bg.webp" type="image/webp">
+        <img src="assets/images/hero_textil_bg.jpg" alt="Taller de confección Upernikao Textil" class="hero-bg-img" fetchpriority="high" decoding="sync">
+      </picture>
       <div class="hero-gradient-overlay"></div>
       <div class="hero-pattern-overlay"></div>
     </div>
@@ -183,8 +191,10 @@
       <!-- Columna Derecha: Escaparate Visual de Confección & Sello de Experiencia -->
       <div class="hero-showcase-col">
         <div class="showcase-card-stage">
-          <div class="showcase-main-frame">
-            <img src="assets/images/uniforme_corporativo.jpg" alt="Dotación textil empresarial de alta gama" class="showcase-img">
+            <picture>
+              <source srcset="assets/images/uniforme_corporativo.webp" type="image/webp">
+              <img src="assets/images/uniforme_corporativo.jpg" alt="Dotación textil empresarial de alta gama" class="showcase-img" width="580" height="420" fetchpriority="high" decoding="async">
+            </picture>
             <div class="showcase-frame-overlay"></div>
             
             <div class="showcase-caption-tag">
@@ -241,13 +251,19 @@
         <div class="about-visual-composition">
           <!-- Marco Principal: Taller de corte y confección -->
           <div class="about-primary-frame">
-            <img src="assets/images/about_textil.jpg" alt="Taller de corte y confección Upernikao" class="about-main-photo">
+            <picture>
+              <source srcset="assets/images/about_textil.webp" type="image/webp">
+              <img src="assets/images/about_textil.jpg" alt="Taller de corte y confección Upernikao" class="about-main-photo" loading="lazy" decoding="async">
+            </picture>
             <div class="about-primary-overlay"></div>
           </div>
 
           <!-- Marco Secundario Solapado: Detalle de Bordado y Acabado -->
           <div class="about-secondary-frame">
-            <img src="assets/images/tecnica_bordado.jpg" alt="Detalle de bordado de alta calidad" class="about-detail-photo">
+            <picture>
+              <source srcset="assets/images/tecnica_bordado.webp" type="image/webp">
+              <img src="assets/images/tecnica_bordado.jpg" alt="Detalle de bordado de alta calidad" class="about-detail-photo" loading="lazy" decoding="async">
+            </picture>
             <span class="about-detail-caption">Bordados de Alta Calidad</span>
           </div>
         </div>
@@ -316,7 +332,7 @@
         <!-- Card 1: Corporativo -->
         <div class="line-card" onclick="openLineModal('corp')" role="button" tabindex="0" aria-label="Ver detalles de Línea Corporativa y Ejecutiva">
           <div class="line-card-img">
-            <img src="assets/images/uniforme_corporativo.jpg" alt="Línea Corporativa y Ejecutiva Upernikao Textil" loading="lazy">
+            <img src="assets/images/uniforme_corporativo.webp" alt="Línea Corporativa y Ejecutiva Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">CORPORATIVO</span>
           </div>
@@ -348,7 +364,7 @@
         <!-- Card 2: Industrial -->
         <div class="line-card" onclick="openLineModal('ind')" role="button" tabindex="0" aria-label="Ver detalles de Línea Industrial y Seguridad">
           <div class="line-card-img">
-            <img src="assets/images/uniforme_industrial.jpg" alt="Línea Industrial y Seguridad Upernikao Textil" loading="lazy">
+            <img src="assets/images/uniforme_industrial.webp" alt="Línea Industrial y Seguridad Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">INDUSTRIAL</span>
           </div>
@@ -380,7 +396,7 @@
         <!-- Card 3: Salud -->
         <div class="line-card" onclick="openLineModal('med')" role="button" tabindex="0" aria-label="Ver detalles de Línea Médica y de Salud">
           <div class="line-card-img">
-            <img src="assets/images/uniforme_medico.jpg" alt="Línea Médica y de Salud Upernikao Textil" loading="lazy">
+            <img src="assets/images/uniforme_medico.webp" alt="Línea Médica y de Salud Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">SALUD Y CLÍNICA</span>
           </div>
@@ -412,7 +428,7 @@
         <!-- Card 4: Gastronomía -->
         <div class="line-card" onclick="openLineModal('chef')" role="button" tabindex="0" aria-label="Ver detalles de Línea Gastronómica y Hotelería">
           <div class="line-card-img">
-            <img src="assets/images/uniforme_chef.jpg" alt="Línea Gastronómica y Cocina Upernikao Textil" loading="lazy">
+            <img src="assets/images/uniforme_chef.webp" alt="Línea Gastronómica y Cocina Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">GASTRONOMÍA</span>
           </div>
@@ -444,7 +460,7 @@
         <!-- Card 5: Deportivo y Colegial -->
         <div class="line-card" onclick="openLineModal('dep')" role="button" tabindex="0" aria-label="Ver detalles de Línea Deportiva y Escolar">
           <div class="line-card-img">
-            <img src="assets/images/linea_deportiva.jpg" alt="Línea Deportiva y Cortavientos Upernikao Textil" loading="lazy">
+            <img src="assets/images/linea_deportiva.webp" alt="Línea Deportiva y Cortavientos Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">DEPORTIVO & EVENTOS</span>
           </div>
@@ -476,7 +492,7 @@
         <!-- Card 6: POP y Promocional -->
         <div class="line-card" onclick="openLineModal('pop')" role="button" tabindex="0" aria-label="Ver detalles de Merchandising y POP Textil">
           <div class="line-card-img">
-            <img src="assets/images/material_pop.jpg" alt="Material POP y Textil Promocional Upernikao Textil" loading="lazy">
+            <img src="assets/images/material_pop.webp" alt="Material POP y Textil Promocional Upernikao Textil" loading="lazy" decoding="async">
             <div class="line-overlay"></div>
             <span class="line-tag">MERCHANDISING</span>
           </div>
@@ -658,7 +674,7 @@
         <!-- Tarjeta 1: Corporativo -->
         <div class="gallery-card" data-gallery-id="corp">
           <div class="gallery-photo-box" onclick="openGalleryModal('corp')" title="Haz clic para ver modelos y fotos de Corporativo">
-            <img src="assets/images/uniforme_corporativo.jpg" alt="Chemises y camisas corporativas bordadas" loading="lazy">
+            <img src="assets/images/uniforme_corporativo.webp" alt="Chemises y camisas corporativas bordadas" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('corp')" aria-label="Ver detalles y modelos de Corporativo">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -679,7 +695,7 @@
         <!-- Tarjeta 2: Industrial & Petrolera -->
         <div class="gallery-card" data-gallery-id="ind">
           <div class="gallery-photo-box" onclick="openGalleryModal('ind')" title="Haz clic para ver modelos y fotos de Industrial">
-            <img src="assets/images/uniforme_industrial.jpg" alt="Bragas petroleras y dotación industrial reflectiva" loading="lazy">
+            <img src="assets/images/uniforme_industrial.webp" alt="Bragas petroleras y dotación industrial reflectiva" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('ind')" aria-label="Ver detalles y modelos de Industrial">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -700,7 +716,7 @@
         <!-- Tarjeta 3: Salud -->
         <div class="gallery-card" data-gallery-id="med">
           <div class="gallery-photo-box" onclick="openGalleryModal('med')" title="Haz clic para ver modelos y fotos de Salud">
-            <img src="assets/images/uniforme_medico.jpg" alt="Scrubs médicos ergonómicos antifluido" loading="lazy">
+            <img src="assets/images/uniforme_medico.webp" alt="Scrubs médicos ergonómicos antifluido" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('med')" aria-label="Ver detalles y modelos de Salud">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -721,7 +737,7 @@
         <!-- Tarjeta 4: Gastronomía -->
         <div class="gallery-card" data-gallery-id="chef">
           <div class="gallery-photo-box" onclick="openGalleryModal('chef')" title="Haz clic para ver modelos y fotos de Gastronomía">
-            <img src="assets/images/uniforme_chef.jpg" alt="Filipinas de chef y delantales barista" loading="lazy">
+            <img src="assets/images/uniforme_chef.webp" alt="Filipinas de chef y delantales barista" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('chef')" aria-label="Ver detalles y modelos de Gastronomía">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -742,7 +758,7 @@
         <!-- Tarjeta 5: Deportivo -->
         <div class="gallery-card" data-gallery-id="dep">
           <div class="gallery-photo-box" onclick="openGalleryModal('dep')" title="Haz clic para ver modelos y fotos de Deportivo">
-            <img src="assets/images/linea_deportiva.jpg" alt="Franelas dry fit y cortavientos deportivos" loading="lazy">
+            <img src="assets/images/linea_deportiva.webp" alt="Franelas dry fit y cortavientos deportivos" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('dep')" aria-label="Ver detalles y modelos de Deportivo">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -763,7 +779,7 @@
         <!-- Tarjeta 6: Merchandising & POP -->
         <div class="gallery-card" data-gallery-id="pop">
           <div class="gallery-photo-box" onclick="openGalleryModal('pop')" title="Haz clic para ver modelos y fotos de Merchandising">
-            <img src="assets/images/material_pop.jpg" alt="Gorras bordadas y tote bags corporativas" loading="lazy">
+            <img src="assets/images/material_pop.webp" alt="Gorras bordadas y tote bags corporativas" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('pop')" aria-label="Ver detalles y modelos de Merchandising">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
@@ -1171,7 +1187,7 @@
       <div class="quote-layout">
         <!-- Visual Lateral (Banner Influenciador Persuasivo) -->
         <div class="quote-visual-card" id="quoteVisualCard">
-          <img src="assets/images/form_showcase.jpg" alt="Confección y prendas Upernikao" class="visual-img">
+          <img src="assets/images/form_showcase.webp" alt="Confección y prendas Upernikao" class="visual-img" loading="lazy" decoding="async">
           <div class="visual-overlay"></div>
           <div class="visual-content">
             <!-- Barra Superior del Banner: Logo en Fondo Blanco en la Esquina -->
@@ -1227,200 +1243,244 @@
             <p class="form-lead">Completa los detalles de tu dotación para enviarte nuestra propuesta formal y disponibilidad de taller.</p>
           </div>
 
+          <!-- STEPPER HEADER (Especial para Móvil) -->
+          <div class="form-stepper" id="formStepper">
+            <div class="stepper-step active" id="stepIndicator1">
+              <div class="stepper-circle">1</div>
+              <div class="stepper-meta">
+                <span class="stepper-label">PASO 1</span>
+                <span class="stepper-name">Tu Pedido</span>
+              </div>
+            </div>
+            <div class="stepper-track">
+              <div class="stepper-progress" id="stepperProgress"></div>
+            </div>
+            <div class="stepper-step" id="stepIndicator2">
+              <div class="stepper-circle">2</div>
+              <div class="stepper-meta">
+                <span class="stepper-label">PASO 2</span>
+                <span class="stepper-name">Datos de Envío</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Mensaje de estado -->
           <div class="form-status" id="formStatus" style="display:none;"></div>
 
           <form id="quoteForm" novalidate>
-            <!-- ── PASO 1: ESPECIFICACIONES DE LA PRENDA / DOTACIÓN ── -->
-            <div class="form-section-divider">
-              <span class="form-step-num">1</span>
-              <div>
-                <strong>¿Qué prendas deseas confeccionar?</strong>
-                <span class="form-step-sub">Prendas, cantidades y tipo de personalización</span>
-              </div>
-            </div>
-
-            <!-- Fila 1: Producto y Cantidad -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="producto">Tipo de Prenda o Dotación <span class="req">*</span></label>
-                <select id="producto" name="producto" required>
-                  <option value="" disabled selected>Selecciona una opción...</option>
-                  <option value="Chemises & Franelas">Chemises & Franelas (Institucionales / Promociones)</option>
-                  <option value="Camisería & Pantalones">Camisería de Vestir & Pantalones Corporativos</option>
-                  <option value="Uniformes Industriales">Uniformes Industriales & Bragas Petroleras</option>
-                  <option value="Dotación Médica">Dotación Médica y de Salud (Scrubs / Batas)</option>
-                  <option value="Chaquetas & Cortavientos">Chaquetas, Chalecos & Cortavientos</option>
-                  <option value="Dotación Gastronómica">Uniformes para Restaurantes & Atención</option>
-                  <option value="Material POP & Gorras">Gorras Bordadas & Material POP Textil</option>
-                  <option value="Confección Especial">Otro modelo / Confección a la medida</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="cantidad">
-                  <span>Cantidad Estimada <span class="req">*</span></span>
-                  <span class="field-hint">Mínimo 12 piezas</span>
-                </label>
-                <input type="number" id="cantidad" name="cantidad" placeholder="Ej: 50" min="12" required>
-              </div>
-            </div>
-
-            <!-- Fila 2: Sector e Institución & Personalización -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="sector">Sector o Tipo de Institución <span class="req">*</span></label>
-                <select id="sector" name="sector" required>
-                  <option value="" disabled selected>Selecciona tu sector...</option>
-                  <option value="Educativo">Educativo (Liceos, Colegios & Universidades)</option>
-                  <option value="Corporativo">Corporativo, Oficinas & Comercios</option>
-                  <option value="Bingos & Eventos">Bingos, Eventos & Entretenimiento</option>
-                  <option value="Promociones">Promociones de Graduación</option>
-                  <option value="Industrial">Industrial, Petrolero & Planta</option>
-                  <option value="Salud">Salud, Clínicas & Estética</option>
-                  <option value="Gastronomía">Restaurantes, Cafés & Hotelería</option>
-                  <option value="Otro">Otro Sector</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="personalizacion">Técnica de Personalización</label>
-                <select id="personalizacion" name="personalizacion">
-                  <option value="" disabled selected>Selecciona el acabado...</option>
-                  <option value="Bordado Computarizado">Bordado Computarizado de Alta Precisión</option>
-                  <option value="DTF Textil">Estampado DTF Textil Ultra HD</option>
-                  <option value="Serigrafía">Serigrafía Textil Duradera</option>
-                  <option value="Sublimación">Sublimación Full Color</option>
-                  <option value="Vinil Textil">Vinil Textil</option>
-                  <option value="Deseo Asesoría">Deseo que me asesoren según mi logo</option>
-                  <option value="Sin Personalización">Sin personalización (Prendas lisas)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Fila 3: Presupuesto y Fecha Requerida -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="presupuesto">Rango de Presupuesto Estimado ($)</label>
-                <select id="presupuesto" name="presupuesto">
-                  <option value="" disabled selected>Selecciona un rango aproximado...</option>
-                  <option value="Menos de $500">Hasta $500 (Lotes iniciales)</option>
-                  <option value="$500 - $1,500">$500 a $1,500 (Dotaciones estándar)</option>
-                  <option value="$1,500 - $3,500">$1,500 a $3,500 (Volumen corporativo / escolar)</option>
-                  <option value="Más de $3,500">Más de $3,500 (Gran escala / Licitaciones)</option>
-                  <option value="A consultar">Prefiero consultarlo con el asesor</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="fechaEntrega">
-                  <span>Fecha Deseada de Entrega</span>
-                  <span class="field-hint">Aprox.</span>
-                </label>
-                <input type="date" id="fechaEntrega" name="fechaEntrega">
-              </div>
-            </div>
-
-            <!-- ── PASO 2: DATOS DE CONTACTO Y ENTREGA ── -->
-            <div class="form-section-divider">
-              <span class="form-step-num">2</span>
-              <div>
-                <strong>¿A quién enviamos la propuesta formal?</strong>
-                <span class="form-step-sub">Datos de tu institución o empresa y lugar de despacho</span>
-              </div>
-            </div>
-
-            <!-- Fila 4: Empresa / Colegio y Cargo -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="empresa">Empresa, Colegio o Institución</label>
-                <input type="text" id="empresa" name="empresa" placeholder="Ej: Liceo Andrés Bello / Inversiones ABC">
-              </div>
-              <div class="form-group">
-                <label for="cargo">Cargo o Rol de Contacto</label>
-                <input type="text" id="cargo" name="cargo" placeholder="Ej: Delegado, Compras, RRHH, Dueño">
-              </div>
-            </div>
-
-            <!-- Fila 5: Nombres -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="nombre">Nombre <span class="req">*</span></label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej: Carlos" required>
-              </div>
-              <div class="form-group">
-                <label for="apellido">Apellido <span class="req">*</span></label>
-                <input type="text" id="apellido" name="apellido" placeholder="Ej: Mendoza" required>
-              </div>
-            </div>
-
-            <!-- Fila 6: Teléfono y Correo -->
-            <div class="form-row">
-              <div class="form-group">
-                <label for="telefono">WhatsApp / Teléfono <span class="req">*</span></label>
-                <div class="phone-input-wrap">
-                  <select id="codigoPais" class="phone-code-select" aria-label="Código telefónico de país">
-                    <option value="+58">🇻🇪 +58 (VE)</option>
-                    <option value="+57">🇨🇴 +57 (CO)</option>
-                    <option value="+1">🇺🇸 +1 (US)</option>
-                    <option value="+507">🇵🇦 +507 (PA)</option>
-                    <option value="+34">🇪🇸 +34 (ES)</option>
-                    <option value="+56">🇨🇱 +56 (CL)</option>
-                  </select>
-                  <input type="tel" id="telefono" name="telefono" placeholder="414 1234567" required>
+            <!-- ── PANE 1: ESPECIFICACIONES DE LA PRENDA / DOTACIÓN ── -->
+            <div class="form-step-pane active" id="formStepPane1">
+              <div class="form-section-divider">
+                <span class="form-step-num">1</span>
+                <div>
+                  <strong>¿Qué prendas deseas confeccionar?</strong>
+                  <span class="form-step-sub">Prendas, cantidades y tipo de personalización</span>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="email">Correo Electrónico <span class="req">*</span></label>
-                <input type="email" id="email" name="email" placeholder="contacto@tuempresa.com" required>
+
+              <!-- Fila 1: Producto y Cantidad -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="producto">Tipo de Prenda o Dotación <span class="req">*</span></label>
+                  <select id="producto" name="producto" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="Chemises & Franelas">Chemises & Franelas (Institucionales / Promociones)</option>
+                    <option value="Camisería & Pantalones">Camisería de Vestir & Pantalones Corporativos</option>
+                    <option value="Uniformes Industriales">Uniformes Industriales & Bragas Petroleras</option>
+                    <option value="Dotación Médica">Dotación Médica y de Salud (Scrubs / Batas)</option>
+                    <option value="Chaquetas & Cortavientos">Chaquetas, Chalecos & Cortavientos</option>
+                    <option value="Dotación Gastronómica">Uniformes para Restaurantes & Atención</option>
+                    <option value="Material POP & Gorras">Gorras Bordadas & Material POP Textil</option>
+                    <option value="Confección Especial">Otro modelo / Confección a la medida</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="cantidad">
+                    <span>Cantidad Estimada <span class="req">*</span></span>
+                    <span class="field-hint">Mínimo 12 piezas</span>
+                  </label>
+                  <input type="number" id="cantidad" name="cantidad" placeholder="Ej: 50" min="12" required>
+                </div>
+              </div>
+
+              <!-- Fila 2: Sector e Institución & Personalización -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sector">Sector o Tipo de Institución <span class="req">*</span></label>
+                  <select id="sector" name="sector" required>
+                    <option value="" disabled selected>Selecciona tu sector...</option>
+                    <option value="Educativo">Educativo (Liceos, Colegios & Universidades)</option>
+                    <option value="Corporativo">Corporativo, Oficinas & Comercios</option>
+                    <option value="Bingos & Eventos">Bingos, Eventos & Entretenimiento</option>
+                    <option value="Promociones">Promociones de Graduación</option>
+                    <option value="Industrial">Industrial, Petrolero & Planta</option>
+                    <option value="Salud">Salud, Clínicas & Estética</option>
+                    <option value="Gastronomía">Restaurantes, Cafés & Hotelería</option>
+                    <option value="Otro">Otro Sector</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="personalizacion">Técnica de Personalización</label>
+                  <select id="personalizacion" name="personalizacion">
+                    <option value="" disabled selected>Selecciona el acabado...</option>
+                    <option value="Bordado Computarizado">Bordado Computarizado de Alta Precisión</option>
+                    <option value="DTF Textil">Estampado DTF Textil Ultra HD</option>
+                    <option value="Serigrafía">Serigrafía Textil Duradera</option>
+                    <option value="Sublimación">Sublimación Full Color</option>
+                    <option value="Vinil Textil">Vinil Textil</option>
+                    <option value="Deseo Asesoría">Deseo que me asesoren según mi logo</option>
+                    <option value="Sin Personalización">Sin personalización (Prendas lisas)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Fila 3: Presupuesto y Fecha Requerida -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="presupuesto">Rango de Presupuesto Estimado ($)</label>
+                  <select id="presupuesto" name="presupuesto">
+                    <option value="" disabled selected>Selecciona un rango aproximado...</option>
+                    <option value="Menos de $500">Hasta $500 (Lotes iniciales)</option>
+                    <option value="$500 - $1,500">$500 a $1,500 (Dotaciones estándar)</option>
+                    <option value="$1,500 - $3,500">$1,500 a $3,500 (Volumen corporativo / escolar)</option>
+                    <option value="Más de $3,500">Más de $3,500 (Gran escala / Licitaciones)</option>
+                    <option value="A consultar">Prefiero consultarlo con el asesor</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="fechaEntrega">
+                    <span>Fecha Deseada de Entrega</span>
+                    <span class="field-hint">Aprox.</span>
+                  </label>
+                  <input type="date" id="fechaEntrega" name="fechaEntrega">
+                </div>
+              </div>
+
+              <!-- Botón Siguiente (Visible en Móvil) -->
+              <div class="step-nav-footer">
+                <button type="button" class="btn btn-primary btn-block btn-lg btn-next-step" id="btnNextStep">
+                  <span>CONTINUAR A DATOS DE ENVÍO</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <div class="step-micro-perks">
+                  <span>⚡ Presupuesto formal en &lt; 24h</span>
+                  <span>•</span>
+                  <span>🔒 Trato directo de taller</span>
+                </div>
               </div>
             </div>
 
-            <!-- Fila 7: Estado / Ciudad de Despacho -->
-            <div class="form-row full-width">
-              <div class="form-group">
-                <label for="estado">Estado / Ciudad de Entrega <span class="req">*</span></label>
-                <select id="estado" name="estado" required>
-                  <option value="" disabled selected>Selecciona tu estado de despacho...</option>
-                  <option value="Distrito Capital">Distrito Capital (Caracas)</option>
-                  <option value="Miranda">Miranda (Guarenas / Guatire / Los Teques)</option>
-                  <option value="Carabobo">Carabobo (Valencia / Puerto Cabello)</option>
-                  <option value="Anzoátegui">Anzoátegui (Puerto La Cruz / Lechería / Barcelona)</option>
-                  <option value="Aragua">Aragua (Maracay / Cagua)</option>
-                  <option value="Zulia">Zulia (Maracaibo / San Francisco)</option>
-                  <option value="Lara">Lara (Barquisimeto / Cabudare)</option>
-                  <option value="Bolívar">Bolívar (Puerto Ordaz / Ciudad Bolívar)</option>
-                  <option value="Monagas">Monagas (Maturín)</option>
-                  <option value="Nueva Esparta">Nueva Esparta (Margarita)</option>
-                  <option value="Falcón">Falcón (Punto Fijo / Coro)</option>
-                  <option value="Táchira">Táchira (San Cristóbal)</option>
-                  <option value="Mérida">Mérida</option>
-                  <option value="Sucre">Sucre (Cumaná)</option>
-                  <option value="Otro">Otro Estado de Venezuela</option>
-                </select>
+            <!-- ── PANE 2: DATOS DE CONTACTO Y ENTREGA ── -->
+            <div class="form-step-pane" id="formStepPane2">
+              <div class="form-section-divider">
+                <span class="form-step-num">2</span>
+                <div>
+                  <strong>¿A quién enviamos la propuesta formal?</strong>
+                  <span class="form-step-sub">Datos de tu institución o empresa y lugar de despacho</span>
+                </div>
               </div>
-            </div>
 
-            <!-- Fila 8: Comentarios Adicionales -->
-            <div class="form-group full-width">
-              <label for="comentarios">
-                <span>Comentarios o Especificaciones Adicionales</span>
-                <span class="field-hint">Opcional</span>
-              </label>
-              <textarea id="comentarios" name="comentarios" rows="3" placeholder="Indícanos colores de tela, tipo de cuello, tallas requeridas o cualquier detalle especial..."></textarea>
-            </div>
+              <!-- Fila 4: Empresa / Colegio y Cargo -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="empresa">Empresa, Colegio o Institución</label>
+                  <input type="text" id="empresa" name="empresa" placeholder="Ej: Liceo Andrés Bello / Inversiones ABC">
+                </div>
+                <div class="form-group">
+                  <label for="cargo">Cargo o Rol de Contacto</label>
+                  <input type="text" id="cargo" name="cargo" placeholder="Ej: Delegado, Compras, RRHH, Dueño">
+                </div>
+              </div>
 
-            <!-- Botones de Acción -->
-            <div class="form-submit-wrapper">
-              <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
-                <span>ENVIAR SOLICITUD DE COTIZACIÓN</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-              </button>
-            </div>
+              <!-- Fila 5: Nombres -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre <span class="req">*</span></label>
+                  <input type="text" id="nombre" name="nombre" placeholder="Ej: Carlos" required>
+                </div>
+                <div class="form-group">
+                  <label for="apellido">Apellido <span class="req">*</span></label>
+                  <input type="text" id="apellido" name="apellido" placeholder="Ej: Mendoza" required>
+                </div>
+              </div>
 
-            <p class="form-privacy-note">
-              🔒 Tus datos son confidenciales y se usarán únicamente para formular tu propuesta comercial sin spam.
-            </p>
+              <!-- Fila 6: Teléfono y Correo -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="telefono">WhatsApp / Teléfono <span class="req">*</span></label>
+                  <div class="phone-input-wrap">
+                    <select id="codigoPais" class="phone-code-select" aria-label="Código telefónico de país">
+                      <option value="+58">🇻🇪 +58 (VE)</option>
+                      <option value="+57">🇨🇴 +57 (CO)</option>
+                      <option value="+1">🇺🇸 +1 (US)</option>
+                      <option value="+507">🇵🇦 +507 (PA)</option>
+                      <option value="+34">🇪🇸 +34 (ES)</option>
+                      <option value="+56">🇨🇱 +56 (CL)</option>
+                    </select>
+                    <input type="tel" id="telefono" name="telefono" placeholder="414 1234567" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Correo Electrónico <span class="req">*</span></label>
+                  <input type="email" id="email" name="email" placeholder="contacto@tuempresa.com" required>
+                </div>
+              </div>
+
+              <!-- Fila 7: Estado / Ciudad de Despacho -->
+              <div class="form-row full-width">
+                <div class="form-group">
+                  <label for="estado">Estado / Ciudad de Entrega <span class="req">*</span></label>
+                  <select id="estado" name="estado" required>
+                    <option value="" disabled selected>Selecciona tu estado de despacho...</option>
+                    <option value="Distrito Capital">Distrito Capital (Caracas)</option>
+                    <option value="Miranda">Miranda (Guarenas / Guatire / Los Teques)</option>
+                    <option value="Carabobo">Carabobo (Valencia / Puerto Cabello)</option>
+                    <option value="Anzoátegui">Anzoátegui (Puerto La Cruz / Lechería / Barcelona)</option>
+                    <option value="Aragua">Aragua (Maracay / Cagua)</option>
+                    <option value="Zulia">Zulia (Maracaibo / San Francisco)</option>
+                    <option value="Lara">Lara (Barquisimeto / Cabudare)</option>
+                    <option value="Bolívar">Bolívar (Puerto Ordaz / Ciudad Bolívar)</option>
+                    <option value="Monagas">Monagas (Maturín)</option>
+                    <option value="Nueva Esparta">Nueva Esparta (Margarita)</option>
+                    <option value="Falcón">Falcón (Punto Fijo / Coro)</option>
+                    <option value="Táchira">Táchira (San Cristóbal)</option>
+                    <option value="Mérida">Mérida</option>
+                    <option value="Sucre">Sucre (Cumaná)</option>
+                    <option value="Otro">Otro Estado de Venezuela</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Fila 8: Comentarios Adicionales -->
+              <div class="form-group full-width">
+                <label for="comentarios">
+                  <span>Comentarios o Especificaciones Adicionales</span>
+                  <span class="field-hint">Opcional</span>
+                </label>
+                <textarea id="comentarios" name="comentarios" rows="3" placeholder="Indícanos colores de tela, tipo de cuello, tallas requeridas o cualquier detalle especial..."></textarea>
+              </div>
+
+              <!-- Botones de Acción (Paso 2) -->
+              <div class="form-submit-wrapper">
+                <div class="step-actions-row">
+                  <button type="button" class="btn btn-step-back" id="btnPrevStep">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>Volver a especificar prendas</span>
+                  </button>
+                  <button type="submit" class="btn btn-primary btn-step-submit btn-lg" id="submitBtn">
+                    <span>ENVIAR SOLICITUD DE COTIZACIÓN</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <p class="form-privacy-note">
+                🔒 Tus datos son confidenciales y se usarán únicamente para formular tu propuesta comercial sin spam.
+              </p>
+            </div>
           </form>
         </div>
       </div>
@@ -1540,7 +1600,7 @@
         <!-- Columna 1: Identidad de Marca -->
         <div class="footer-brand-col">
           <a href="#hero" class="footer-logo-link" aria-label="Upernikao Textil Inicio">
-            <img src="assets/images/UT-FOOTER-clean.png" alt="Upernikao Textil" class="footer-logo">
+            <img src="assets/images/UT-FOOTER-clean.webp" alt="Upernikao Textil" class="footer-logo" loading="lazy" decoding="async" width="220" height="38">
           </a>
           <p class="footer-bio">
             Confección textil de alta gama para empresas e instituciones. Diseñamos soluciones de vestir que combinan comodidad, resistencia y distinción visual en toda Venezuela.
@@ -1634,7 +1694,7 @@
       <div class="wa-modal-screen" id="waFormScreen">
         <div class="wa-modal-header">
           <div class="wa-modal-icon-badge">
-            <img src="assets/images/logo_icono_blanco.png?v=2" alt="Upernikao Textil" class="wa-modal-logo-img">
+            <img src="assets/images/logo_icono_blanco.webp" alt="Upernikao Textil" class="wa-modal-logo-img" width="48" height="48" loading="lazy" decoding="async">
           </div>
           <div class="wa-modal-title-wrap">
             <span class="wa-modal-tag">ATENCIÓN DIRECTA</span>

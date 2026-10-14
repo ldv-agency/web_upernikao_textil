@@ -213,6 +213,101 @@ _Enviado desde el portal web oficial de Upernikao Textil_`;
     return encodeURIComponent(msg);
   }
 
+  // ── 6.1 MULTI-PASO MÓVIL (STEPPER) ──
+  const btnNextStep = document.getElementById('btnNextStep');
+  const btnPrevStep = document.getElementById('btnPrevStep');
+  const formStepPane1 = document.getElementById('formStepPane1');
+  const formStepPane2 = document.getElementById('formStepPane2');
+  const stepIndicator1 = document.getElementById('stepIndicator1');
+  const stepIndicator2 = document.getElementById('stepIndicator2');
+  const stepperProgress = document.getElementById('stepperProgress');
+
+  function validateStep1() {
+    const producto = document.getElementById('producto');
+    const cantidad = document.getElementById('cantidad');
+    const sector = document.getElementById('sector');
+
+    if (!producto || !producto.value) {
+      showStatus('Por favor selecciona el tipo de prenda o dotación que deseas confeccionar.', 'error');
+      if (producto) producto.focus();
+      return false;
+    }
+
+    const cantNum = parseInt(cantidad ? cantidad.value : 0, 10);
+    if (!cantidad || !cantidad.value || isNaN(cantNum) || cantNum < 12) {
+      showStatus('Por favor ingresa una cantidad estimada válida (mínimo 12 piezas).', 'error');
+      if (cantidad) cantidad.focus();
+      return false;
+    }
+
+    if (!sector || !sector.value) {
+      showStatus('Por favor selecciona tu sector o tipo de institución.', 'error');
+      if (sector) sector.focus();
+      return false;
+    }
+
+    if (formStatus) formStatus.style.display = 'none';
+    return true;
+  }
+
+  function setFormStep(step) {
+    if (!formStepPane1 || !formStepPane2) return;
+
+    if (step === 2) {
+      formStepPane1.classList.remove('active');
+      formStepPane2.classList.add('active');
+      if (stepIndicator1) {
+        stepIndicator1.classList.remove('active');
+        stepIndicator1.classList.add('completed');
+      }
+      if (stepIndicator2) {
+        stepIndicator2.classList.add('active');
+      }
+      if (stepperProgress) {
+        stepperProgress.style.width = '100%';
+      }
+    } else {
+      formStepPane2.classList.remove('active');
+      formStepPane1.classList.add('active');
+      if (stepIndicator2) {
+        stepIndicator2.classList.remove('active');
+      }
+      if (stepIndicator1) {
+        stepIndicator1.classList.add('active');
+        stepIndicator1.classList.remove('completed');
+      }
+      if (stepperProgress) {
+        stepperProgress.style.width = '50%';
+      }
+    }
+
+    // Scroll suave hacia la cabecera del formulario en móvil
+    const formCard = document.querySelector('.quote-form-card');
+    if (formCard && window.innerWidth <= 768) {
+      formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  if (btnNextStep) {
+    btnNextStep.addEventListener('click', () => {
+      if (validateStep1()) {
+        setFormStep(2);
+      }
+    });
+  }
+
+  if (btnPrevStep) {
+    btnPrevStep.addEventListener('click', () => {
+      setFormStep(1);
+    });
+  }
+
+  if (stepIndicator1) {
+    stepIndicator1.addEventListener('click', () => {
+      setFormStep(1);
+    });
+  }
+
   // Envío tradicional del Formulario
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
@@ -247,6 +342,7 @@ _Enviado desde el portal web oficial de Upernikao Textil_`;
         );
 
         quoteForm.reset();
+        setFormStep(1);
       }, 1200);
     });
   }
