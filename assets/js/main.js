@@ -124,6 +124,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── 2.1 SCROLL DIRECTO AL FORMULARIO EN MÓVIL AL CLICKEAR COTIZACIÓN ──
+  document.querySelectorAll('a[href="#cotizacion"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        const formCard = document.getElementById('quoteFormCard') || document.querySelector('.quote-form-card');
+        if (formCard) {
+          formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (navMenu && navMenu.classList.contains('open')) {
+          navMenu.classList.remove('open');
+          if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  });
+
   // ── 3. NAVBAR STICKY & ENLACES ACTIVOS ──
   const navbar = document.getElementById('navbar');
   const sections = document.querySelectorAll('section[id]');
@@ -821,9 +838,10 @@ window.preselectProduct = function(productValue) {
   if (productSelect) {
     productSelect.value = productValue;
   }
-  const quoteSec = document.getElementById('cotizacion');
-  if (quoteSec) {
-    quoteSec.scrollIntoView({ behavior: 'smooth' });
+  const formCard = document.getElementById('quoteFormCard') || document.querySelector('.quote-form-card');
+  const target = (window.innerWidth <= 768 && formCard) ? formCard : document.getElementById('cotizacion');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 };
 
