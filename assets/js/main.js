@@ -419,13 +419,13 @@ const linesCatalogData = {
   corp: {
     tag: 'CORPORATIVO',
     title: 'Línea Corporativa & Ejecutiva',
-    img: 'assets/images/uniforme_corporativo.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
     desc: 'Prendas elegantes y cómodas que transmiten solidez profesional, confianza y presencia de marca ante clientes en oficinas, atención al público y eventos.',
     items: [
+      'Camisas y blusas ejecutivas en tela Oxford y Popelina con bordado milimétrico',
+      'Pantalones ejecutivos de vestir dama y caballero con corte anatómico',
       'Chemises polo en piqué de algodón peinado (220g)',
-      'Camisas y blusas ejecutivas en tela Oxford y Popelina',
-      'Pantalones de vestir y faldas ejecutivas a la medida',
-      'Chalecos corporativos y blazers con forro interno de satén'
+      'Chalecos corporativos y blazers ejecutivos con forro de satén'
     ],
     features: ['Bordado computarizado milimétrico', 'Telas frescas y antiarrugas', 'Corte anatómico dama y caballero'],
     productVal: 'Uniformes Corporativos'
@@ -572,16 +572,16 @@ window.closeLineModal = function() {
 const galleryCatalogData = {
   corp: {
     tag: 'CORPORATIVO & EJECUTIVO',
-    title: 'Chemises Piqué y Camisas Ejecutivas',
+    title: 'Camisas Ejecutivas Oxford y Chemises Corporativas',
     productVal: 'Uniformes Corporativos',
     photos: [
-      'assets/images/uniforme_corporativo.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
       'assets/images/form_showcase.jpg',
       'assets/images/about_textil.jpg'
     ],
     captions: [
-      'Chemises Piqué en Algodón Peinado con Bordado en Pecho',
-      'Bordados Computarizados Milimétricos en Cuello y Manga',
+      'Camisas Ejecutivas Oxford y Pantalones de Vestir con Bordado Corporativo',
+      'Bordados Computarizados Milimétricos en Cuello, Pecho y Manga',
       'Patronaje Ergonómico y Acabados de Confección Corporativa'
     ]
   },
