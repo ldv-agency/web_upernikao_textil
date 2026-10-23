@@ -51,6 +51,16 @@
     .thanks-wa:hover { background: var(--wa-green-hover); }
     .thanks-back { display: inline-block; margin-top: 18px; color: var(--wine-primary); font-weight: 600; font-size: 14px; }
   </style>
+  <!-- Meta Pixel (Upernikao Textil) -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2326778011482948');
+    fbq('track', 'PageView');
+  </script>
 </head>
 <body>
   <main class="thanks-page">
@@ -100,8 +110,21 @@
 
       // Conversión para GTM / Google Ads / Meta (solo si viene de un envío real)
       window.dataLayer = window.dataLayer || [];
-      if (data.event_id) {
+      // Una sola vez por lead: recargar /gracias no vuelve a contar la conversión
+      var yaContado = '';
+      try { yaContado = sessionStorage.getItem('upernikao_lead_contado') || ''; } catch (err) { /* almacenamiento bloqueado */ }
+      if (data.event_id && yaContado !== data.event_id) {
         window.dataLayer.push({ event: 'lead_thank_you', form_type: data.formType, event_id: data.event_id });
+        // Mismo eventID que envía n8n a la API de Conversiones: Meta deduplica
+        if (window.fbq) {
+          fbq('track', 'Lead', {
+            content_name: data.producto || '',
+            num_items: parseInt(data.cantidad, 10) || undefined,
+            currency: 'USD',
+            value: 0
+          }, { eventID: data.event_id });
+        }
+        try { sessionStorage.setItem('upernikao_lead_contado', data.event_id); } catch (err) { /* almacenamiento bloqueado */ }
       }
     })();
   </script>

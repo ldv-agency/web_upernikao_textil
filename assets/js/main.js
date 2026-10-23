@@ -1252,10 +1252,23 @@ window.submitWaQuickForm = function(e) {
   // 2. Enviar el lead a n8n (keepalive: termina aunque el usuario salte a WhatsApp)
   const fullPhone = `${codigoPais} ${cleanTel}`;
   const quickForm = document.getElementById('waQuickForm');
+  const eventId = generateEventId();
+
+  // El modal no pasa por /gracias: el Lead del Pixel se dispara aquí con el mismo
+  // eventID que n8n envía a la API de Conversiones (Meta deduplica ambos)
+  if (window.fbq) {
+    fbq('track', 'Lead', {
+      content_name: producto,
+      num_items: parseInt(cantidad, 10) || undefined,
+      currency: 'USD',
+      value: 0
+    }, { eventID: eventId });
+  }
+
   window.sendLead({
     formType: 'whatsapp_modal',
     button_origin: currentWaOrigin || 'Boton_Flotante',
-    event_id: generateEventId(),
+    event_id: eventId,
     hp: (quickForm && quickForm.querySelector('input[name="website"]') || {}).value || '',
     firstName: nombre,
     lastName: apellido,
