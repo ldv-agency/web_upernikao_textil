@@ -2,9 +2,9 @@
   "version": 2,
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/cotizar", "destination": "/index.html" },
-    { "source": "/cotizar/:linea", "destination": "/index.html" },
-    { "source": "/whatsapp", "destination": "/index.html" }
+    { "source": "/cotizar", "destination": "/" },
+    { "source": "/cotizar/:linea", "destination": "/" },
+    { "source": "/whatsapp", "destination": "/" }
   ],
   "headers": [
     {
