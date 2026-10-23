@@ -523,7 +523,7 @@ _Enviado desde el portal web oficial de Upernikao Textil_`;
             waText: decodeURIComponent(buildWhatsAppMessage())
           }));
         } catch (err) { /* almacenamiento bloqueado */ }
-        window.location.href = 'gracias.html';
+        window.location.href = '/gracias.html';
       });
     });
   }
@@ -576,6 +576,9 @@ _Enviado desde el portal web oficial de Upernikao Textil_`;
 
   // Inicializar modal rápido de WhatsApp
   initWaModal();
+
+  // Links cortos de campañas (/cotizar, /cotizar/<línea>, /whatsapp)
+  initCampaignLanding();
 });
 
 // ── 8. DATOS DEL CATÁLOGO DE CONFECCIÓN (MODAL INTERACTIVO) ──
@@ -583,7 +586,7 @@ const linesCatalogData = {
   corp: {
     tag: 'CORPORATIVO',
     title: 'Línea Corporativa & Ejecutiva',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
     desc: 'Prendas elegantes y cómodas que transmiten solidez profesional, confianza y presencia de marca ante clientes en oficinas, atención al público y eventos.',
     items: [
       'Camisas y blusas ejecutivas en tela Oxford y Popelina con bordado milimétrico',
@@ -597,7 +600,7 @@ const linesCatalogData = {
   ind: {
     tag: 'INDUSTRIAL',
     title: 'Línea Industrial & Seguridad',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
     desc: 'Confección reforzada de máxima resistencia para soportar las condiciones operativas más exigentes en plantas, talleres mecánicos, construcción y faena.',
     items: [
       'Bragas petroleras y de faena con doble y triple costura de seguridad',
@@ -611,7 +614,7 @@ const linesCatalogData = {
   med: {
     tag: 'SALUD Y CLÍNICA',
     title: 'Línea Médica, Salud & Belleza',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
     desc: 'Scrubs y uniformes clínicos con tecnología textil antifluido y elasticidad, concebidos para ofrecer confort superior en jornadas de trabajo continuas.',
     items: [
       'Conjuntos de scrubs quirúrgicos en tela antifluido stretch',
@@ -625,7 +628,7 @@ const linesCatalogData = {
   chef: {
     tag: 'GASTRONOMÍA',
     title: 'Línea Gastronómica & Hotelería',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
     desc: 'Estilo contemporáneo, comodidad y alta transpirabilidad para chefs, cocineros, baristas, brigadas de cocina y staff de salón.',
     items: [
       'Filipinas de chef con paneles transpirables de malla en espalda',
@@ -639,7 +642,7 @@ const linesCatalogData = {
   dep: {
     tag: 'DEPORTIVO & EVENTOS',
     title: 'Línea Deportiva, Escolar & Urbana',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
     desc: 'Textiles livianos, secado rápido y protección climática para colegios, clubes deportivos, activaciones de marca y eventos masivos.',
     items: [
       'Franelas técnicas deportivas en tela Dry-Fit microperforada',
@@ -653,7 +656,7 @@ const linesCatalogData = {
   pop: {
     tag: 'MERCHANDISING',
     title: 'Merchandising & POP Textil',
-    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
+    img: '/assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
     desc: 'Accesorios y prendas de vestir promocionales de alto impacto para campañas de branding, fidelización de clientes, lanzamientos y exposiciones.',
     items: [
       'Gorras trucker, planas y estructuradas con bordado 3D',
@@ -739,9 +742,9 @@ const galleryCatalogData = {
     title: 'Camisas Ejecutivas Oxford y Chemises Corporativas',
     productVal: 'Camisería & Pantalones',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
-      'assets/images/form_showcase.jpg',
-      'assets/images/about_textil.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
+      '/assets/images/form_showcase.jpg',
+      '/assets/images/about_textil.jpg'
     ],
     captions: [
       'Camisas Ejecutivas Oxford y Pantalones de Vestir con Bordado Corporativo',
@@ -754,9 +757,9 @@ const galleryCatalogData = {
     title: 'Bragas Petroleras y Chaquetas Reflectivas 3M',
     productVal: 'Uniformes Industriales',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
-      'assets/images/hero_textil_bg.jpg',
-      'assets/images/tecnica_bordado.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
+      '/assets/images/hero_textil_bg.jpg',
+      '/assets/images/tecnica_bordado.jpg'
     ],
     captions: [
       'Bragas Petroleras de Alta Resistencia con Bandas Reflectivas 3M',
@@ -769,9 +772,9 @@ const galleryCatalogData = {
     title: 'Conjuntos de Scrubs Quirúrgicos Antifluido',
     productVal: 'Dotación Médica',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
-      'assets/images/form_showcase.jpg',
-      'assets/images/tecnica_dtf.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
+      '/assets/images/form_showcase.jpg',
+      '/assets/images/tecnica_dtf.jpg'
     ],
     captions: [
       'Conjunto Scrub Quirúrgico Antifluido Anatómico y Fresco',
@@ -784,9 +787,9 @@ const galleryCatalogData = {
     title: 'Filipinas de Chef y Delantales en Lona',
     productVal: 'Dotación Gastronómica',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
-      'assets/images/about_textil.jpg',
-      'assets/images/uniforme_corporativo.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
+      '/assets/images/about_textil.jpg',
+      '/assets/images/uniforme_corporativo.jpg'
     ],
     captions: [
       'Filipina de Chef con Respiraderos Térmicos Laterales',
@@ -799,9 +802,9 @@ const galleryCatalogData = {
     title: 'Franelas Técnicas Dry-Fit y Cortavientos',
     productVal: 'Chaquetas & Cortavientos',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
-      'assets/images/tecnica_dtf.jpg',
-      'assets/images/form_showcase.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
+      '/assets/images/tecnica_dtf.jpg',
+      '/assets/images/form_showcase.jpg'
     ],
     captions: [
       'Franelas Técnicas Dry-Fit Microperforadas de Secado Veloz',
@@ -814,9 +817,9 @@ const galleryCatalogData = {
     title: 'Gorras Estructuradas y Bolsas Ecológicas',
     productVal: 'Material POP & Gorras',
     photos: [
-      'assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
-      'assets/images/tecnica_bordado.jpg',
-      'assets/images/tecnica_dtf.jpg'
+      '/assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
+      '/assets/images/tecnica_bordado.jpg',
+      '/assets/images/tecnica_dtf.jpg'
     ],
     captions: [
       'Gorras Estructuradas con Bordado 3D de Alto Relieve',
@@ -1008,6 +1011,32 @@ window.preselectProduct = function(productValue) {
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 };
+
+// ── LINKS CORTOS PARA CAMPAÑAS ──
+// vercel.json reescribe estas rutas a index.html; aquí se decide a dónde llevar al visitante.
+// La URL se mantiene (con sus UTM y fbclid) para que n8n registre la página de entrada exacta.
+const CAMPAIGN_LINE_PRODUCTS = {
+  corporativa: 'Camisería & Pantalones',
+  industrial: 'Uniformes Industriales',
+  medica: 'Dotación Médica',
+  gastronomica: 'Dotación Gastronómica',
+  deportiva: 'Chaquetas & Cortavientos',
+  pop: 'Material POP & Gorras',
+  chemises: 'Chemises & Franelas'
+};
+
+function initCampaignLanding() {
+  const parts = window.location.pathname.toLowerCase().replace(/\/+$/, '').split('/').filter(Boolean);
+  if (parts.length === 0) return;
+
+  // Esperar a que el layout se asiente (imágenes del hero) antes de desplazar
+  if (parts[0] === 'whatsapp') {
+    setTimeout(() => window.openWaModal('Link_Campana_WhatsApp'), 400);
+  } else if (parts[0] === 'cotizar') {
+    const product = CAMPAIGN_LINE_PRODUCTS[parts[1]] || '';
+    setTimeout(() => window.preselectProduct(product), 400);
+  }
+}
 
 // ==========================================================================
 // 12. BANNER INFLUENCIADOR PUBLICITARIO (LADO FORMULARIO - LOOP PERSUASIVO)
