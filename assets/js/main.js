@@ -678,6 +678,15 @@ window.openLineModal = function(lineId) {
   const data = linesCatalogData[lineId];
   if (!data) return;
 
+  // GA4: qué líneas del catálogo generan más interés
+  if (window.gtag) {
+    gtag('event', 'view_item', {
+      currency: 'USD',
+      value: 0,
+      items: [{ item_id: lineId, item_name: data.title, item_category: data.productVal }]
+    });
+  }
+
   const modal = document.getElementById('lineModal');
   const modalImg = document.getElementById('modalImg');
   const modalTag = document.getElementById('modalTag');
@@ -1263,6 +1272,17 @@ window.submitWaQuickForm = function(e) {
       currency: 'USD',
       value: 0
     }, { eventID: eventId });
+  }
+  if (window.gtag) {
+    gtag('event', 'generate_lead', {
+      currency: 'USD',
+      value: 0,
+      lead_source: 'Formulario WhatsApp',
+      item_name: producto,
+      quantity: parseInt(cantidad, 10) || undefined,
+      transaction_id: eventId,
+      transport_type: 'beacon'
+    });
   }
 
   window.sendLead({
