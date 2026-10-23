@@ -186,18 +186,38 @@ window.sendLead = async function(lead) {
     localStorage.setItem('upernikao_ultimo_lead', JSON.stringify(payload));
   } catch (err) { /* almacenamiento bloqueado */ }
 
-  try {
-    const res = await fetch(LEAD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      keepalive: true
-    });
-    return res.ok;
-  } catch (err) {
-    console.warn('No se pudo enviar el lead al webhook:', err);
-    return false;
+  // text/plain es una petición "simple": no hay preflight CORS, así que llega en un
+  // solo viaje (clave con datos móviles lentos). n8n la convierte a objeto en "Parsear Cuerpo".
+  const body = JSON.stringify(payload);
+  for (let intento = 1; intento <= 2; intento++) {
+    try {
+      const controller = window.AbortController ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 15000) : null;
+      const res = await fetch(LEAD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: body,
+        keepalive: true,
+        signal: controller ? controller.signal : undefined
+      });
+      if (timer) clearTimeout(timer);
+      if (res.ok) return true;
+    } catch (err) {
+      console.warn(`Intento ${intento} de envío del lead falló:`, err);
+    }
+    if (intento === 1) await new Promise(r => setTimeout(r, 1200));
   }
+
+  // Último recurso: sendBeacon lo entrega el navegador aunque la red esté lenta
+  // o el usuario cambie de página. Si queda en cola, el lead se considera enviado.
+  try {
+    if (navigator.sendBeacon) {
+      return navigator.sendBeacon(LEAD_WEBHOOK_URL, new Blob([body], { type: 'text/plain;charset=UTF-8' }));
+    }
+  } catch (err) {
+    console.warn('sendBeacon no disponible:', err);
+  }
+  return false;
 };
 
 // Ejecutar extracción inmediatamente al cargar el script
