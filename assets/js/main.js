@@ -3,11 +3,17 @@
  * Manejo de Menú, Filtros, Slider de Reseñas, FAQ y Formulario Inteligente WhatsApp
  */
 
-// Número de WhatsApp Oficial de Upernikao Textil (Accesible globalmente)
-const WHATSAPP_NUMERO = '584140000000';
+// Número de WhatsApp de Upernikao Textil (Accesible globalmente)
+// TODO: reemplazar por el número comercial definitivo de la marca
+const WHATSAPP_NUMERO = '584248335228';
 window.WHATSAPP_NUMERO = WHATSAPP_NUMERO;
 
-// ── TRACKING UTM & IDENTIFICADORES DE CLICK (SESSION STORAGE) ──
+// Webhook de n8n que recibe los leads (Sheet, Telegram, GHL, emails, Meta CAPI)
+const LEAD_WEBHOOK_URL = 'https://n8n.srv1402866.hstgr.cloud/webhook/prospectos_upernikao';
+
+// ── TRACKING UTM & IDENTIFICADORES DE CLICK ──
+// Se guardan en localStorage (90 días) para no perder la atribución si el lead
+// vuelve otro día. "Primer toque" no se sobrescribe; "último toque" sí.
 const TRACKING_KEYS = [
   'utm_source',
   'utm_medium',
@@ -15,57 +21,102 @@ const TRACKING_KEYS = [
   'utm_content',
   'utm_term',
   'fbclid',
-  'gclid'
+  'gclid',
+  'gbraid',
+  'wbraid',
+  'ttclid'
 ];
+const TRACKING_STORE_KEY = 'upernikao_tracking';
+const TRACKING_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+const PAGE_LOADED_AT = Date.now();
+
+function readTrackingStore() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(TRACKING_STORE_KEY) || 'null');
+    if (stored && Date.now() - stored.updatedAt < TRACKING_TTL_MS) return stored;
+  } catch (err) { /* almacenamiento bloqueado */ }
+  return null;
+}
+
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : '';
+}
 
 function initUtmTracking() {
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasAnyTrackingInUrl = TRACKING_KEYS.some(key => urlParams.has(key) && urlParams.get(key).trim() !== '');
+  const urlParams = new URLSearchParams(window.location.search);
+  const fromUrl = {};
+  TRACKING_KEYS.forEach(key => {
+    const val = (urlParams.get(key) || '').trim();
+    if (val) fromUrl[key] = val.slice(0, 300);
+  });
+  const hasAnyTrackingInUrl = Object.keys(fromUrl).length > 0;
 
-    if (hasAnyTrackingInUrl) {
-      // 1. Extraer de la URL y persistir en sessionStorage
-      TRACKING_KEYS.forEach(key => {
-        const val = urlParams.get(key);
-        if (val !== null && val.trim() !== '') {
-          sessionStorage.setItem(key, val.trim());
-        }
-      });
-
-      // Si llegó con algún parámetro de tracking pero sin utm_medium, asignar 'Web' por defecto
-      if (!sessionStorage.getItem('utm_medium')) {
-        sessionStorage.setItem('utm_medium', 'Web');
-      }
-    } else {
-      // 2. Si no hay UTMs en la URL, verificar si ya existen en sessionStorage
-      // para que acompañen al usuario en cualquier página que visite
-      if (!sessionStorage.getItem('utm_source')) {
-        sessionStorage.setItem('utm_source', 'Organico');
-        sessionStorage.setItem('utm_medium', 'Web');
-      }
+  // Sin UTM: deducir el canal por el referrer (Instagram, Facebook, Google...)
+  if (!hasAnyTrackingInUrl && document.referrer) {
+    let refHost = '';
+    try { refHost = new URL(document.referrer).hostname; } catch (err) { /* referrer inválido */ }
+    if (refHost && refHost !== window.location.hostname) {
+      fromUrl.utm_source = refHost.replace(/^www\./, '').replace(/^(l|lm|m)\./, '');
+      fromUrl.utm_medium = 'referral';
     }
-
-    // Asegurar que las llaves restantes no queden como null
-    TRACKING_KEYS.forEach(key => {
-      if (sessionStorage.getItem(key) === null) {
-        sessionStorage.setItem(key, '');
-      }
-    });
-
-    // Helper global para acceder a los datos de tracking
-    window.getUtmParams = function() {
-      const data = {};
-      TRACKING_KEYS.forEach(key => {
-        data[key] = sessionStorage.getItem(key) || '';
-      });
-      return data;
-    };
-
-    window.syncTrackingToForms = syncTrackingToForms;
-
-  } catch (err) {
-    console.warn('UTM tracking no disponible o sessionStorage bloqueado:', err);
   }
+
+  const store = readTrackingStore() || {};
+  const touch = Object.keys(fromUrl).length > 0
+    ? Object.assign({ landing_page: window.location.href.slice(0, 500), referrer: document.referrer.slice(0, 300), at: new Date().toISOString() }, fromUrl)
+    : null;
+
+  if (touch) {
+    if (!store.first) store.first = touch;
+    store.last = touch;
+  }
+  if (!store.first_landing) store.first_landing = window.location.href.slice(0, 500);
+  store.updatedAt = Date.now();
+
+  try {
+    localStorage.setItem(TRACKING_STORE_KEY, JSON.stringify(store));
+  } catch (err) {
+    console.warn('UTM tracking: almacenamiento bloqueado', err);
+  }
+
+  // Si llega desde un anuncio de Meta sin cookie _fbc, construirla como lo haría el Pixel
+  if (fromUrl.fbclid && !getCookie('_fbc')) {
+    const fbc = 'fb.1.' + Date.now() + '.' + fromUrl.fbclid;
+    document.cookie = '_fbc=' + fbc + '; path=/; max-age=7776000; SameSite=Lax';
+  }
+
+  // Helper global: atribución de último toque (lo que viaja a n8n y GHL)
+  window.getUtmParams = function() {
+    const current = readTrackingStore() || store;
+    const last = current.last || {};
+    const data = {};
+    TRACKING_KEYS.forEach(key => {
+      data[key] = last[key] || '';
+    });
+    if (!data.utm_source) data.utm_source = 'Organico';
+    if (!data.utm_medium) data.utm_medium = 'Web';
+    return data;
+  };
+
+  // Contexto completo para el payload del lead
+  window.getTrackingContext = function() {
+    const current = readTrackingStore() || store;
+    const first = current.first || {};
+    return {
+      first_utm_source: first.utm_source || '',
+      first_utm_medium: first.utm_medium || '',
+      first_utm_campaign: first.utm_campaign || '',
+      landing_page: (current.last && current.last.landing_page) || current.first_landing || window.location.href,
+      first_landing_page: first.landing_page || current.first_landing || '',
+      referrer: (current.last && current.last.referrer) || document.referrer || '',
+      current_page: window.location.href.slice(0, 500),
+      fbp: getCookie('_fbp'),
+      fbc: getCookie('_fbc')
+    };
+  };
+
+  window.syncTrackingToForms = syncTrackingToForms;
 }
 
 function syncTrackingToForms() {
@@ -91,6 +142,63 @@ function syncTrackingToForms() {
     console.warn('Error sincronizando UTMs a formularios:', e);
   }
 }
+
+// ── ENVÍO DE LEADS A N8N ──
+function generateEventId() {
+  if (window.crypto && crypto.randomUUID) return 'lead_' + crypto.randomUUID();
+  return 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+}
+
+function getDeviceType() {
+  return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Móvil' : 'Escritorio';
+}
+
+/**
+ * Envía el lead al webhook de n8n. Usa keepalive para que el envío termine
+ * aunque el usuario salga de la página (WhatsApp o /gracias).
+ * Devuelve true si el webhook respondió OK.
+ */
+window.sendLead = async function(lead) {
+  const payload = Object.assign(
+    {},
+    lead,
+    window.getUtmParams ? window.getUtmParams() : {},
+    window.getTrackingContext ? window.getTrackingContext() : {},
+    {
+      device: getDeviceType(),
+      elapsed_ms: Date.now() - PAGE_LOADED_AT,
+      submitted_at: new Date().toISOString()
+    }
+  );
+
+  // Evento para Google Tag Manager / Meta Pixel (mismo event_id que la API de Conversiones)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'generate_lead',
+    form_type: payload.formType,
+    event_id: payload.event_id,
+    lead_product: payload.product,
+    lead_quantity: payload.quantity
+  });
+
+  // Respaldo local por si el webhook falla
+  try {
+    localStorage.setItem('upernikao_ultimo_lead', JSON.stringify(payload));
+  } catch (err) { /* almacenamiento bloqueado */ }
+
+  try {
+    const res = await fetch(LEAD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+    return res.ok;
+  } catch (err) {
+    console.warn('No se pudo enviar el lead al webhook:', err);
+    return false;
+  }
+};
 
 // Ejecutar extracción inmediatamente al cargar el script
 initUtmTracking();
@@ -184,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Configuración del número de WhatsApp Oficial
   // Puedes actualizar este número fácilmente por el número comercial real de Upernikao Textil
-  const officialWaNumber = window.WHATSAPP_NUMERO || '584140000000';
+  const officialWaNumber = WHATSAPP_NUMERO;
 
   /**
    * Genera el texto estructurado para WhatsApp a partir de los datos del formulario
@@ -344,23 +452,79 @@ _Enviado desde el portal web oficial de Upernikao Textil_`;
         return;
       }
 
+      if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)) {
+        showStatus('Por favor ingresa un correo electrónico válido.', 'error');
+        document.getElementById('email').focus();
+        return;
+      }
+
+      const cleanTel = telefono.replace(/\D/g, '').replace(/^0/, '');
+      if (cleanTel.length < 10) {
+        showStatus('Por favor ingresa un número de teléfono válido (mínimo 10 dígitos).', 'error');
+        document.getElementById('telefono').focus();
+        return;
+      }
+
+      const consent = document.getElementById('consentQuote');
+      if (consent && !consent.checked) {
+        showStatus('Debes aceptar la política de privacidad para enviar tu solicitud.', 'error');
+        consent.focus();
+        return;
+      }
+
       // Feedback visual de envío
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>PROCESANDO COTIZACIÓN...</span>';
+      submitBtn.innerHTML = '<span>ENVIANDO SOLICITUD...</span>';
       submitBtn.disabled = true;
 
-      setTimeout(() => {
+      const codigoPais = document.getElementById('codigoPais').value;
+      const lead = {
+        formType: 'quote_form',
+        event_id: generateEventId(),
+        hp: (quoteForm.querySelector('input[name="website"]') || {}).value || '',
+        firstName: nombre,
+        lastName: apellido,
+        email: email,
+        phone: `${codigoPais}${cleanTel}`,
+        company: document.getElementById('empresa').value.trim(),
+        role: document.getElementById('cargo').value.trim(),
+        state: estado,
+        sector: sector,
+        product: producto,
+        quantity: cantidad,
+        customization: document.getElementById('personalizacion').value,
+        budget: document.getElementById('presupuesto').value,
+        deliveryDate: document.getElementById('fechaEntrega').value,
+        message: document.getElementById('comentarios').value.trim(),
+        consent: true
+      };
+
+      window.sendLead(lead).then((ok) => {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-        
-        showStatus(
-          `¡Gracias ${nombre}! Tu solicitud ha sido registrada exitosamente. Nuestro equipo comercial se comunicará contigo en menos de 24 horas con tu cotización formal detallada.`,
-          'success'
-        );
 
-        quoteForm.reset();
-        setFormStep(1);
-      }, 1200);
+        if (!ok) {
+          // El webhook falló: no perder el lead, ofrecer WhatsApp con todos los datos
+          showStatus('No pudimos registrar tu solicitud automáticamente. Envíanosla por WhatsApp con un clic:', 'error');
+          const waLink = document.createElement('a');
+          waLink.href = `https://wa.me/${officialWaNumber}?text=${buildWhatsAppMessage()}`;
+          waLink.target = '_blank';
+          waLink.rel = 'noopener';
+          waLink.className = 'btn btn-primary btn-block';
+          waLink.style.marginTop = '10px';
+          waLink.textContent = 'Enviar solicitud por WhatsApp';
+          formStatus.appendChild(waLink);
+          return;
+        }
+
+        try {
+          sessionStorage.setItem('upernikao_gracias', JSON.stringify({
+            nombre, producto, cantidad, formType: 'quote_form', event_id: lead.event_id,
+            waText: decodeURIComponent(buildWhatsAppMessage())
+          }));
+        } catch (err) { /* almacenamiento bloqueado */ }
+        window.location.href = 'gracias.html';
+      });
     });
   }
 
@@ -428,7 +592,7 @@ const linesCatalogData = {
       'Chalecos corporativos y blazers ejecutivos con forro de satén'
     ],
     features: ['Bordado computarizado milimétrico', 'Telas frescas y antiarrugas', 'Corte anatómico dama y caballero'],
-    productVal: 'Uniformes Corporativos'
+    productVal: 'Camisería & Pantalones'
   },
   ind: {
     tag: 'INDUSTRIAL',
@@ -456,7 +620,7 @@ const linesCatalogData = {
       'Gorros clínicos y tapabocas personalizados a tono'
     ],
     features: ['Repelencia certificada a fluidos', 'Tela stretch ultra transpirable', 'Secado rápido y cero arrugas'],
-    productVal: 'Uniformes Médicos'
+    productVal: 'Dotación Médica'
   },
   chef: {
     tag: 'GASTRONOMÍA',
@@ -470,7 +634,7 @@ const linesCatalogData = {
       'Camisas y delantales para capitanes de meseros y personal de sala'
     ],
     features: ['Resistencia al calor y grasas', 'Acabados antimanchas de fácil lavado', 'Diseño moderno de autor'],
-    productVal: 'Uniformes Corporativos'
+    productVal: 'Dotación Gastronómica'
   },
   dep: {
     tag: 'DEPORTIVO & EVENTOS',
@@ -484,7 +648,7 @@ const linesCatalogData = {
       'Uniformes escolares reglamentarios y conjuntos deportivos de gala'
     ],
     features: ['Tecnología Dry-Fit antitranspirante', 'Protección contra viento y llovizna', 'Sublimación digital full cover o DTF'],
-    productVal: 'Corta Vientos'
+    productVal: 'Chaquetas & Cortavientos'
   },
   pop: {
     tag: 'MERCHANDISING',
@@ -498,7 +662,7 @@ const linesCatalogData = {
       'Prendas especiales para activaciones masivas y dotación promocional'
     ],
     features: ['Alta recordación de marca', 'Acabados gráficos de máxima definición', 'Producción flexible desde 12 piezas'],
-    productVal: 'Material POP'
+    productVal: 'Material POP & Gorras'
   }
 };
 
@@ -573,7 +737,7 @@ const galleryCatalogData = {
   corp: {
     tag: 'CORPORATIVO & EJECUTIVO',
     title: 'Camisas Ejecutivas Oxford y Chemises Corporativas',
-    productVal: 'Uniformes Corporativos',
+    productVal: 'Camisería & Pantalones',
     photos: [
       'assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
       'assets/images/form_showcase.jpg',
@@ -603,7 +767,7 @@ const galleryCatalogData = {
   med: {
     tag: 'SALUD & CLÍNICA',
     title: 'Conjuntos de Scrubs Quirúrgicos Antifluido',
-    productVal: 'Uniformes Médicos',
+    productVal: 'Dotación Médica',
     photos: [
       'assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
       'assets/images/form_showcase.jpg',
@@ -618,7 +782,7 @@ const galleryCatalogData = {
   chef: {
     tag: 'GASTRONOMÍA & SERVICIO',
     title: 'Filipinas de Chef y Delantales en Lona',
-    productVal: 'Uniformes Corporativos',
+    productVal: 'Dotación Gastronómica',
     photos: [
       'assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
       'assets/images/about_textil.jpg',
@@ -633,7 +797,7 @@ const galleryCatalogData = {
   dep: {
     tag: 'DEPORTIVO & STAFF',
     title: 'Franelas Técnicas Dry-Fit y Cortavientos',
-    productVal: 'Franelas Sublimadas',
+    productVal: 'Chaquetas & Cortavientos',
     photos: [
       'assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
       'assets/images/tecnica_dtf.jpg',
@@ -648,7 +812,7 @@ const galleryCatalogData = {
   pop: {
     tag: 'MERCHANDISING & POP',
     title: 'Gorras Estructuradas y Bolsas Ecológicas',
-    productVal: 'Material POP',
+    productVal: 'Material POP & Gorras',
     photos: [
       'assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
       'assets/images/tecnica_bordado.jpg',
@@ -1037,30 +1201,42 @@ window.submitWaQuickForm = function(e) {
     return false;
   }
 
+  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)) {
+    if (errorEl) {
+      errorEl.textContent = 'Por favor ingresa un correo electrónico válido.';
+      errorEl.style.display = 'block';
+    }
+    return false;
+  }
+
+  const consent = document.getElementById('consentWa');
+  if (consent && !consent.checked) {
+    if (errorEl) {
+      errorEl.textContent = 'Debes aceptar la política de privacidad para continuar.';
+      errorEl.style.display = 'block';
+    }
+    return false;
+  }
+
   if (errorEl) errorEl.style.display = 'none';
 
-  // 2. Guardar lead en localStorage como copia de seguridad local
+  // 2. Enviar el lead a n8n (keepalive: termina aunque el usuario salte a WhatsApp)
   const fullPhone = `${codigoPais} ${cleanTel}`;
-  try {
-    const leadRecord = {
-      fecha: new Date().toISOString(),
-      nombre,
-      apellido,
-      email,
-      telefono: fullPhone,
-      producto,
-      cantidad,
-      origen_boton: currentWaOrigin || 'Boton_Flotante',
-      utm_params: (typeof window.getUtmParams === 'function') ? window.getUtmParams() : {}
-    };
+  const quickForm = document.getElementById('waQuickForm');
+  window.sendLead({
+    formType: 'whatsapp_modal',
+    button_origin: currentWaOrigin || 'Boton_Flotante',
+    event_id: generateEventId(),
+    hp: (quickForm && quickForm.querySelector('input[name="website"]') || {}).value || '',
+    firstName: nombre,
+    lastName: apellido,
+    email: email,
+    phone: `${codigoPais}${cleanTel}`,
+    product: producto,
+    quantity: cantidad,
+    consent: true
+  });
 
-    localStorage.setItem('upernikao_ultimo_lead', JSON.stringify(leadRecord));
-    const leadsHistory = JSON.parse(localStorage.getItem('upernikao_leads_historial') || '[]');
-    leadsHistory.push(leadRecord);
-    localStorage.setItem('upernikao_leads_historial', JSON.stringify(leadsHistory));
-  } catch (err) {
-    console.warn('No se pudo guardar respaldo local en localStorage:', err);
-  }
   const summaryName = document.getElementById('waSummaryName');
   const summaryFullname = document.getElementById('waSummaryFullname');
   const summaryEmail = document.getElementById('waSummaryEmail');
@@ -1087,7 +1263,7 @@ window.submitWaQuickForm = function(e) {
 ━━━━━━━━━━━━━━━━━━━━━━━━
 _Solicitud iniciada desde la web oficial de Upernikao Textil_`;
 
-  const waTargetNumber = window.WHATSAPP_NUMERO || '584140000000';
+  const waTargetNumber = WHATSAPP_NUMERO;
   waTargetRedirectUrl = `https://wa.me/${waTargetNumber}?text=${encodeURIComponent(waMsg)}`;
 
   // Cambiar INMEDIATAMENTE a pantalla de agradecimiento
@@ -1103,8 +1279,9 @@ _Solicitud iniciada desde la web oficial de Upernikao Textil_`;
   const modalDialog = document.querySelector('.wa-modal-dialog');
   if (modalDialog) modalDialog.scrollTop = 0;
 
-  // Iniciar cuenta regresiva estricta de 10 segundos
-  let secondsLeft = 10;
+  // Cuenta regresiva corta; el botón permite abrir WhatsApp de inmediato
+  const countdownTotal = 6;
+  let secondsLeft = countdownTotal;
   const countdownNum = document.getElementById('waCountdownNum');
   const secondsText = document.getElementById('waSecondsText');
   const progressFill = document.getElementById('waProgressFill');
@@ -1123,15 +1300,16 @@ _Solicitud iniciada desde la web oficial de Upernikao Textil_`;
     if (countdownNum) countdownNum.textContent = secondsLeft;
     if (secondsText) secondsText.textContent = secondsLeft;
     if (progressFill) {
-      const pct = Math.max(0, (secondsLeft / 10) * 100);
+      const pct = Math.max(0, (secondsLeft / countdownTotal) * 100);
       progressFill.style.width = pct + '%';
     }
 
     if (secondsLeft <= 0) {
       clearInterval(waCountdownInterval);
       waCountdownInterval = null;
+      // Navegar en la misma pestaña: window.open sin clic lo bloquean los navegadores móviles
       if (waTargetRedirectUrl) {
-        window.open(waTargetRedirectUrl, '_blank');
+        window.location.href = waTargetRedirectUrl;
       }
     }
   }, 1000);

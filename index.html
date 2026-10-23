@@ -30,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Estilos Principales -->
-  <link rel="stylesheet" href="assets/css/style.css?v=4.3">
+  <link rel="stylesheet" href="assets/css/style.css?v=4.4">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -39,10 +39,12 @@
     "@type": "LocalBusiness",
     "name": "Upernikao Textil",
     "description": "Fabricación y confección de uniformes corporativos, industriales, de salud y material promocional textil con personalización de alta gama.",
-    "telephone": "+584140000000",
-    "email": "contacto@upernikaotextil.com",
+    "telephone": "+584248335228",
+    "email": "upernikaotextil@gmail.com",
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Barcelona",
+      "addressRegion": "Anzoátegui",
       "addressCountry": "VE"
     },
     "areaServed": ["Venezuela", "Gran Caracas", "Anzoátegui", "Carabobo", "Zulia", "Lara", "Aragua"],
@@ -357,7 +359,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <span>Ver Más</span>
               </button>
-              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Uniformes Corporativos')">
+              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Camisería & Pantalones')">
                 <span>Cotizar</span>
                 <span class="arrow">→</span>
               </a>
@@ -427,7 +429,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <span>Ver Más</span>
               </button>
-              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Uniformes Médicos')">
+              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Dotación Médica')">
                 <span>Cotizar</span>
                 <span class="arrow">→</span>
               </a>
@@ -462,7 +464,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <span>Ver Más</span>
               </button>
-              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Uniformes Corporativos')">
+              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Dotación Gastronómica')">
                 <span>Cotizar</span>
                 <span class="arrow">→</span>
               </a>
@@ -497,7 +499,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <span>Ver Más</span>
               </button>
-              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Corta Vientos')">
+              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Chaquetas & Cortavientos')">
                 <span>Cotizar</span>
                 <span class="arrow">→</span>
               </a>
@@ -532,7 +534,7 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <span>Ver Más</span>
               </button>
-              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Material POP')">
+              <a href="#cotizacion" class="btn-line-quote-direct" onclick="event.stopPropagation(); preselectProduct('Material POP & Gorras')">
                 <span>Cotizar</span>
                 <span class="arrow">→</span>
               </a>
@@ -1482,6 +1484,18 @@
                 <textarea id="comentarios" name="comentarios" rows="3" placeholder="Indícanos colores de tela, tipo de cuello, tallas requeridas o cualquier detalle especial..."></textarea>
               </div>
 
+              <!-- Consentimiento de datos (requerido por Meta / Google Ads) -->
+              <label class="form-consent" for="consentQuote">
+                <input type="checkbox" id="consentQuote" name="consent" checked>
+                <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y que Upernikao Textil me contacte por WhatsApp, llamada o correo sobre mi cotización.</span>
+              </label>
+
+              <!-- Campo trampa anti-bots (oculto para personas) -->
+              <div class="hp-field" aria-hidden="true">
+                <label for="website">No llenar este campo</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
               <!-- Botones de Acción (Paso 2) -->
               <div class="form-submit-wrapper">
                 <div class="step-actions-row">
@@ -1631,7 +1645,7 @@
             </div>
             <div class="contact-line">
               <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              <a href="mailto:contacto@upernikaotextil.com">contacto@upernikaotextil.com</a>
+              <a href="mailto:upernikaotextil@gmail.com">upernikaotextil@gmail.com</a>
             </div>
           </div>
         </div>
@@ -1640,12 +1654,12 @@
         <div class="footer-links-col">
           <h4 class="footer-heading">Líneas de Dotación</h4>
           <ul>
-            <li><a href="#lineas" onclick="preselectProduct('Uniformes Corporativos')">Línea Corporativa & Ejecutiva</a></li>
-            <li><a href="#lineas" onclick="preselectProduct('Uniformes Industriales')">Línea Industrial & Faena</a></li>
-            <li><a href="#lineas" onclick="preselectProduct('Uniformes Médicos')">Línea Médica & Quirúrgica</a></li>
-            <li><a href="#lineas" onclick="preselectProduct('Uniformes Corporativos')">Línea Gastronómica & Barista</a></li>
-            <li><a href="#lineas" onclick="preselectProduct('Corta Vientos')">Línea Deportiva & Escolar</a></li>
-            <li><a href="#lineas" onclick="preselectProduct('Material POP')">Merchandising & POP Textil</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Camisería & Pantalones')">Línea Corporativa & Ejecutiva</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Uniformes Industriales')">Línea Industrial & Faena</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Dotación Médica')">Línea Médica & Quirúrgica</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Dotación Gastronómica')">Línea Gastronómica & Barista</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Chaquetas & Cortavientos')">Línea Deportiva & Escolar</a></li>
+            <li><a href="#cotizacion" onclick="preselectProduct('Material POP & Gorras')">Merchandising & POP Textil</a></li>
           </ul>
         </div>
 
@@ -1683,6 +1697,8 @@
         </div>
         <div class="footer-sublinks">
           <span>Confección Textil de Alta Gama B2B</span>
+          <span>·</span>
+          <a href="privacidad.html">Política de privacidad</a>
           <span>·</span>
           <a href="#hero">Volver al inicio ↑</a>
         </div>
@@ -1776,6 +1792,16 @@
             </div>
           </div>
 
+          <label class="form-consent form-consent-compact" for="consentWa">
+            <input type="checkbox" id="consentWa" name="consent" checked>
+            <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y ser contactado por WhatsApp.</span>
+          </label>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="waWebsite">No llenar este campo</label>
+            <input type="text" id="waWebsite" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
           <div class="wa-form-error" id="waFormError" style="display:none;"></div>
 
           <button type="button" class="wa-submit-btn" id="waSubmitBtn" onclick="submitWaQuickForm(event)">
@@ -1829,10 +1855,10 @@
         <!-- Caja de Contador de 10 segundos -->
         <div class="wa-countdown-box">
           <div class="countdown-spinner-wrap">
-            <div class="countdown-number" id="waCountdownNum">10</div>
+            <div class="countdown-number" id="waCountdownNum">6</div>
           </div>
           <div class="countdown-info">
-            <strong>Redirigiendo a WhatsApp en <span id="waSecondsText">10</span> segundos...</strong>
+            <strong>Abriendo WhatsApp en <span id="waSecondsText">6</span> segundos...</strong>
             <span>Se abrirá el chat con todos tus datos listos para enviar.</span>
           </div>
         </div>
@@ -1852,6 +1878,6 @@
   </div>
 
   <!-- Script Principal -->
-  <script src="assets/js/main.js?v=4.3"></script>
+  <script src="assets/js/main.js?v=4.4"></script>
 </body>
 </html>
