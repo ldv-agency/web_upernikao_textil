@@ -433,7 +433,7 @@ const linesCatalogData = {
   ind: {
     tag: 'INDUSTRIAL',
     title: 'Línea Industrial & Seguridad',
-    img: 'assets/images/uniforme_industrial.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
     desc: 'Confección reforzada de máxima resistencia para soportar las condiciones operativas más exigentes en plantas, talleres mecánicos, construcción y faena.',
     items: [
       'Bragas petroleras y de faena con doble y triple costura de seguridad',
@@ -447,7 +447,7 @@ const linesCatalogData = {
   med: {
     tag: 'SALUD Y CLÍNICA',
     title: 'Línea Médica, Salud & Belleza',
-    img: 'assets/images/uniforme_medico.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
     desc: 'Scrubs y uniformes clínicos con tecnología textil antifluido y elasticidad, concebidos para ofrecer confort superior en jornadas de trabajo continuas.',
     items: [
       'Conjuntos de scrubs quirúrgicos en tela antifluido stretch',
@@ -461,7 +461,7 @@ const linesCatalogData = {
   chef: {
     tag: 'GASTRONOMÍA',
     title: 'Línea Gastronómica & Hotelería',
-    img: 'assets/images/uniforme_chef.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
     desc: 'Estilo contemporáneo, comodidad y alta transpirabilidad para chefs, cocineros, baristas, brigadas de cocina y staff de salón.',
     items: [
       'Filipinas de chef con paneles transpirables de malla en espalda',
@@ -475,7 +475,7 @@ const linesCatalogData = {
   dep: {
     tag: 'DEPORTIVO & EVENTOS',
     title: 'Línea Deportiva, Escolar & Urbana',
-    img: 'assets/images/linea_deportiva.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
     desc: 'Textiles livianos, secado rápido y protección climática para colegios, clubes deportivos, activaciones de marca y eventos masivos.',
     items: [
       'Franelas técnicas deportivas en tela Dry-Fit microperforada',
@@ -489,7 +489,7 @@ const linesCatalogData = {
   pop: {
     tag: 'MERCHANDISING',
     title: 'Merchandising & POP Textil',
-    img: 'assets/images/material_pop.jpg',
+    img: 'assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
     desc: 'Accesorios y prendas de vestir promocionales de alto impacto para campañas de branding, fidelización de clientes, lanzamientos y exposiciones.',
     items: [
       'Gorras trucker, planas y estructuradas con bordado 3D',
@@ -590,7 +590,7 @@ const galleryCatalogData = {
     title: 'Bragas Petroleras y Chaquetas Reflectivas 3M',
     productVal: 'Uniformes Industriales',
     photos: [
-      'assets/images/uniforme_industrial.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
       'assets/images/hero_textil_bg.jpg',
       'assets/images/tecnica_bordado.jpg'
     ],
@@ -605,7 +605,7 @@ const galleryCatalogData = {
     title: 'Conjuntos de Scrubs Quirúrgicos Antifluido',
     productVal: 'Uniformes Médicos',
     photos: [
-      'assets/images/uniforme_medico.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
       'assets/images/form_showcase.jpg',
       'assets/images/tecnica_dtf.jpg'
     ],
@@ -620,7 +620,7 @@ const galleryCatalogData = {
     title: 'Filipinas de Chef y Delantales en Lona',
     productVal: 'Uniformes Corporativos',
     photos: [
-      'assets/images/uniforme_chef.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
       'assets/images/about_textil.jpg',
       'assets/images/uniforme_corporativo.jpg'
     ],
@@ -635,7 +635,7 @@ const galleryCatalogData = {
     title: 'Franelas Técnicas Dry-Fit y Cortavientos',
     productVal: 'Franelas Sublimadas',
     photos: [
-      'assets/images/linea_deportiva.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
       'assets/images/tecnica_dtf.jpg',
       'assets/images/form_showcase.jpg'
     ],
@@ -650,7 +650,7 @@ const galleryCatalogData = {
     title: 'Gorras Estructuradas y Bolsas Ecológicas',
     productVal: 'Material POP',
     photos: [
-      'assets/images/material_pop.jpg',
+      'assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
       'assets/images/tecnica_bordado.jpg',
       'assets/images/tecnica_dtf.jpg'
     ],
