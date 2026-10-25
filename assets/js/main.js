@@ -706,6 +706,17 @@ window.openLineModal = function(lineId) {
       items: [{ item_id: lineId, item_name: data.title, item_category: data.productVal }]
     });
   }
+  // Meta: públicos de remarketing por línea (ej. quienes vieron la línea médica)
+  if (window.fbq) {
+    fbq('track', 'ViewContent', {
+      content_type: 'product_group',
+      content_ids: [lineId],
+      content_name: data.title,
+      content_category: data.productVal,
+      currency: 'USD',
+      value: 0
+    });
+  }
 
   const modal = document.getElementById('lineModal');
   const modalImg = document.getElementById('modalImg');
@@ -772,8 +783,8 @@ const galleryCatalogData = {
     productVal: 'Camisería & Pantalones',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp',
-      '/assets/images/form_showcase.jpg',
-      '/assets/images/about_textil.jpg'
+      '/assets/images/form_showcase.webp',
+      '/assets/images/about_textil.webp'
     ],
     captions: [
       'Camisas Ejecutivas Oxford y Pantalones de Vestir con Bordado Corporativo',
@@ -787,8 +798,8 @@ const galleryCatalogData = {
     productVal: 'Uniformes Industriales',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial.webp',
-      '/assets/images/hero_textil_bg.jpg',
-      '/assets/images/tecnica_bordado.jpg'
+      '/assets/images/hero_textil_bg.webp',
+      '/assets/images/tecnica_bordado.webp'
     ],
     captions: [
       'Bragas Petroleras de Alta Resistencia con Bandas Reflectivas 3M',
@@ -802,8 +813,8 @@ const galleryCatalogData = {
     productVal: 'Dotación Médica',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica.webp',
-      '/assets/images/form_showcase.jpg',
-      '/assets/images/tecnica_dtf.jpg'
+      '/assets/images/form_showcase.webp',
+      '/assets/images/tecnica_dtf.webp'
     ],
     captions: [
       'Conjunto Scrub Quirúrgico Antifluido Anatómico y Fresco',
@@ -817,8 +828,8 @@ const galleryCatalogData = {
     productVal: 'Dotación Gastronómica',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica.webp',
-      '/assets/images/about_textil.jpg',
-      '/assets/images/uniforme_corporativo.jpg'
+      '/assets/images/about_textil.webp',
+      '/assets/images/uniforme_corporativo.webp'
     ],
     captions: [
       'Filipina de Chef con Respiraderos Térmicos Laterales',
@@ -832,8 +843,8 @@ const galleryCatalogData = {
     productVal: 'Chaquetas & Cortavientos',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva.webp',
-      '/assets/images/tecnica_dtf.jpg',
-      '/assets/images/form_showcase.jpg'
+      '/assets/images/tecnica_dtf.webp',
+      '/assets/images/form_showcase.webp'
     ],
     captions: [
       'Franelas Técnicas Dry-Fit Microperforadas de Secado Veloz',
@@ -847,8 +858,8 @@ const galleryCatalogData = {
     productVal: 'Material POP & Gorras',
     photos: [
       '/assets/images/barcelona-anzoategui-upernikao-textil-lineapop.webp',
-      '/assets/images/tecnica_bordado.jpg',
-      '/assets/images/tecnica_dtf.jpg'
+      '/assets/images/tecnica_bordado.webp',
+      '/assets/images/tecnica_dtf.webp'
     ],
     captions: [
       'Gorras Estructuradas con Bordado 3D de Alto Relieve',
@@ -1063,6 +1074,17 @@ function initCampaignLanding() {
     setTimeout(() => window.openWaModal('Link_Campana_WhatsApp'), 400);
   } else if (parts[0] === 'cotizar') {
     const product = CAMPAIGN_LINE_PRODUCTS[parts[1]] || '';
+    // Quien entra por un anuncio de una línea también cuenta para el remarketing de esa línea
+    if (product && window.fbq) {
+      fbq('track', 'ViewContent', {
+        content_type: 'product_group',
+        content_ids: [parts[1]],
+        content_name: product,
+        content_category: product,
+        currency: 'USD',
+        value: 0
+      });
+    }
     setTimeout(() => window.preselectProduct(product), 400);
   }
 }

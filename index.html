@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) - GA4 Upernikao Textil -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-16TZ6MRVCK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-16TZ6MRVCK');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Upernikao Textil | Confección Textil Premium & Uniformes Corporativos</title>
@@ -25,11 +16,13 @@
   <meta property="og:url" content="https://upernikaotextil.com/">
   <meta property="og:title" content="Upernikao Textil | Confección Textil Premium & Uniformes Corporativos">
   <meta property="og:description" content="Diseñamos y confeccionamos la imagen textil de tu empresa con la más alta durabilidad, confort y acabados de precisión.">
-  <meta property="og:image" content="https://upernikaotextil.com/assets/images/hero_textil_bg.jpg">
+  <meta property="og:image" content="https://upernikaotextil.com/assets/images/og-upernikao.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Taller de confección Upernikao Textil">
   <meta property="og:locale" content="es_VE">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://upernikaotextil.com/assets/images/hero_textil_bg.jpg">
+  <meta name="twitter:image" content="https://upernikaotextil.com/assets/images/og-upernikao.jpg">
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
@@ -44,10 +37,11 @@
   <!-- Google Fonts: Optimizado para máxima velocidad de render FCP/LCP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"></noscript>
   
   <!-- Estilos Principales -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=4.9">
+  <link rel="stylesheet" href="/assets/css/style.css?v=5.0">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -56,7 +50,7 @@
     "@type": "LocalBusiness",
     "name": "Upernikao Textil",
     "url": "https://upernikaotextil.com/",
-    "image": "https://upernikaotextil.com/assets/images/hero_textil_bg.jpg",
+    "image": "https://upernikaotextil.com/assets/images/og-upernikao.jpg",
     "logo": "https://upernikaotextil.com/assets/images/logo_vertical.png",
     "description": "Fabricación y confección de uniformes corporativos, industriales, de salud y material promocional textil con personalización de alta gama.",
     "telephone": "+584248335228",
@@ -71,15 +65,41 @@
     "priceRange": "$$"
   }
   </script>
-  <!-- Meta Pixel (Upernikao Textil) -->
+  <!-- GA4 + Meta Pixel: las funciones existen desde el inicio (los eventos quedan en cola) y las
+       librerías se descargan al primer gesto del usuario o a los 3,5 s, para no bloquear el celular. -->
   <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-16TZ6MRVCK');
+
+    !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
     fbq('init', '2326778011482948');
     fbq('track', 'PageView');
+
+    (function () {
+      var loaded = false;
+      function addScript(src, attrs) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        for (var k in (attrs || {})) s.setAttribute(k, attrs[k]);
+        document.head.appendChild(s);
+      }
+      function loadTags() {
+        if (loaded) return;
+        loaded = true;
+        addScript('https://www.googletagmanager.com/gtag/js?id=G-16TZ6MRVCK');
+        addScript('https://connect.facebook.net/en_US/fbevents.js');
+        addScript('https://link.msgsndr.com/js/external-tracking.js', { 'data-tracking-id': 'tk_d8b2731dfa70425abd0852270cc25f73' });
+      }
+      ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function (ev) {
+        window.addEventListener(ev, loadTags, { once: true, passive: true });
+      });
+      window.addEventListener('load', function () { setTimeout(loadTags, 3500); });
+    })();
   </script>
 </head>
 <body>
@@ -113,7 +133,7 @@
   <header class="navbar-header" id="navbar">
     <nav class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="Upernikao Textil Inicio">
-        <img src="/assets/images/UT- HERO-clean.webp" alt="Upernikao Textil Logo" class="logo-img logo-light-nav" width="220" height="38">
+        <img src="/assets/images/logo-nav.webp" alt="Upernikao Textil Logo" class="logo-img logo-light-nav" width="220" height="38">
       </a>
 
       <!-- Botón Hamburguesa Móvil -->
@@ -149,7 +169,7 @@
       <picture class="hero-bg-picture">
         <source media="(max-width: 768px)" srcset="/assets/images/hero_textil_bg_mobile.webp" type="image/webp">
         <source srcset="/assets/images/hero_textil_bg.webp" type="image/webp">
-        <img src="/assets/images/hero_textil_bg.jpg" alt="Taller de confección Upernikao Textil" class="hero-bg-img" fetchpriority="high" decoding="sync">
+        <img src="/assets/images/hero_textil_bg.jpg" alt="Taller de confección Upernikao Textil" class="hero-bg-img" width="1376" height="768" fetchpriority="high" decoding="sync">
       </picture>
       <div class="hero-gradient-overlay"></div>
       <div class="hero-pattern-overlay"></div>
@@ -224,7 +244,7 @@
       <div class="hero-showcase-col">
         <div class="showcase-card-stage">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp" type="image/webp">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
               <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.jpg" alt="Dotación textil empresarial de alta gama Upernikao Textil" class="showcase-img" width="580" height="420" fetchpriority="high" decoding="async">
             </picture>
             <div class="showcase-frame-overlay"></div>
@@ -284,8 +304,8 @@
           <!-- Marco Principal: Taller de corte y confección -->
           <div class="about-primary-frame">
             <picture>
-              <source srcset="/assets/images/about_textil.webp" type="image/webp">
-              <img src="/assets/images/about_textil.jpg" alt="Taller de corte y confección Upernikao" class="about-main-photo" loading="lazy" decoding="async">
+              <source srcset="/assets/images/about_textil-800.webp 800w, /assets/images/about_textil.webp 1200w" sizes="(max-width: 768px) 92vw, 560px" type="image/webp">
+              <img src="/assets/images/about_textil.jpg" alt="Taller de corte y confección Upernikao" class="about-main-photo" width="1200" height="896" loading="lazy" decoding="async">
             </picture>
             <div class="about-primary-overlay"></div>
           </div>
@@ -294,7 +314,7 @@
           <div class="about-secondary-frame">
             <picture>
               <source srcset="/assets/images/tecnica_bordado.webp" type="image/webp">
-              <img src="/assets/images/tecnica_bordado.jpg" alt="Detalle de bordado de alta calidad" class="about-detail-photo" loading="lazy" decoding="async">
+              <img src="/assets/images/tecnica_bordado.jpg" alt="Detalle de bordado de alta calidad" class="about-detail-photo" width="800" height="1129" loading="lazy" decoding="async">
             </picture>
             <span class="about-detail-caption">Bordados de Alta Calidad</span>
           </div>
@@ -316,7 +336,7 @@
             <div class="about-pillar-box">
               <div class="pillar-box-number">01</div>
               <div class="pillar-box-content">
-                <h4>Uniformes para Todo Tipo de Sector</h4>
+                <h3>Uniformes para Todo Tipo de Sector</h3>
                 <p>Confeccionamos camisas, chemises, franelas y pantalones para liceos, universidades y promociones de graduación, así como uniformes para bingos, comercios, empresas de servicio y personal operativo.</p>
               </div>
             </div>
@@ -324,7 +344,7 @@
             <div class="about-pillar-box">
               <div class="pillar-box-number">02</div>
               <div class="pillar-box-content">
-                <h4>Taller Propio de Bordado y Estampado</h4>
+                <h3>Taller Propio de Bordado y Estampado</h3>
                 <p>Realizamos todo el proceso en nuestro taller con bordado computarizado y estampado de alta resistencia. El logo o escudo queda nítido y soporta las lavadas continuas sin perder color ni forma.</p>
               </div>
             </div>
@@ -332,7 +352,7 @@
             <div class="about-pillar-box">
               <div class="pillar-box-number">03</div>
               <div class="pillar-box-content">
-                <h4>Atención Directa y Precios de Fábrica</h4>
+                <h3>Atención Directa y Precios de Fábrica</h3>
                 <p>Trato directo sin intermediarios. Te orientamos en la elección de telas según tu presupuesto y necesidad, garantizando acabados de primera y entregas puntuales.</p>
               </div>
             </div>
@@ -365,8 +385,8 @@
         <div class="line-card" onclick="openLineModal('corp')" role="button" tabindex="0" aria-label="Ver detalles de Línea Corporativa y Ejecutiva">
           <div class="line-card-img line-card-img-corp">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.jpg" alt="Línea Corporativa y Ejecutiva Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.jpg" alt="Línea Corporativa y Ejecutiva Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">CORPORATIVO</span>
@@ -401,8 +421,8 @@
         <div class="line-card" onclick="openLineModal('ind')" role="button" tabindex="0" aria-label="Ver detalles de Línea Industrial y Seguridad">
           <div class="line-card-img">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.jpg" alt="Línea Industrial y Seguridad Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.jpg" alt="Línea Industrial y Seguridad Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">INDUSTRIAL</span>
@@ -436,8 +456,8 @@
         <div class="line-card" onclick="openLineModal('med')" role="button" tabindex="0" aria-label="Ver detalles de Línea Médica y de Salud">
           <div class="line-card-img">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.jpg" alt="Línea Médica y de Salud Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.jpg" alt="Línea Médica y de Salud Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">SALUD Y CLÍNICA</span>
@@ -471,8 +491,8 @@
         <div class="line-card" onclick="openLineModal('chef')" role="button" tabindex="0" aria-label="Ver detalles de Línea Gastronómica y Hotelería">
           <div class="line-card-img">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.jpg" alt="Línea Gastronómica y Cocina Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.jpg" alt="Línea Gastronómica y Cocina Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">GASTRONOMÍA</span>
@@ -506,8 +526,8 @@
         <div class="line-card" onclick="openLineModal('dep')" role="button" tabindex="0" aria-label="Ver detalles de Línea Deportiva y Escolar">
           <div class="line-card-img">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.jpg" alt="Línea Deportiva y Cortavientos Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.jpg" alt="Línea Deportiva y Cortavientos Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">DEPORTIVO & EVENTOS</span>
@@ -541,8 +561,8 @@
         <div class="line-card" onclick="openLineModal('pop')" role="button" tabindex="0" aria-label="Ver detalles de Merchandising y POP Textil">
           <div class="line-card-img">
             <picture>
-              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.webp" type="image/webp">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.jpg" alt="Material POP y Textil Promocional Upernikao Textil Barcelona Anzoátegui" loading="lazy" decoding="async">
+              <source srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" type="image/webp">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.jpg" alt="Material POP y Textil Promocional Upernikao Textil Barcelona Anzoátegui" width="1200" height="837" loading="lazy" decoding="async">
             </picture>
             <div class="line-overlay"></div>
             <span class="line-tag">MERCHANDISING</span>
@@ -582,7 +602,7 @@
         </button>
         <div class="line-modal-grid">
           <div class="line-modal-visual">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa.webp" alt="Línea Corporativa y Ejecutiva Upernikao Textil Barcelona Anzoátegui" id="modalImg" class="line-modal-img">
+            <img alt="Línea Corporativa y Ejecutiva Upernikao Textil Barcelona Anzoátegui" id="modalImg" class="line-modal-img">
             <div class="line-modal-overlay"></div>
             <span class="line-modal-tag" id="modalTag">CORPORATIVO</span>
           </div>
@@ -592,7 +612,7 @@
             <p class="line-modal-desc" id="modalDesc"></p>
             
             <div class="line-modal-items-block">
-              <h4>Prendas y Dotaciones Incluidas:</h4>
+              <h3>Prendas y Dotaciones Incluidas:</h3>
               <ul class="line-modal-list" id="modalItems"></ul>
             </div>
 
@@ -725,14 +745,14 @@
         <!-- Tarjeta 1: Corporativo -->
         <div class="gallery-card" data-gallery-id="corp">
           <div class="gallery-photo-box" onclick="openGalleryModal('corp')" title="Haz clic para ver modelos y fotos de Corporativo">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp" alt="Camisas ejecutivas y uniformes corporativos Upernikao Textil" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Camisas ejecutivas y uniformes corporativos Upernikao Textil" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('corp')" aria-label="Ver detalles y modelos de Corporativo">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Corporativo</span>
-              <h4>Chemises Piqué con Bordado en Pecho</h4>
+              <h3>Chemises Piqué con Bordado en Pecho</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -746,14 +766,14 @@
         <!-- Tarjeta 2: Industrial & Petrolera -->
         <div class="gallery-card" data-gallery-id="ind">
           <div class="gallery-photo-box" onclick="openGalleryModal('ind')" title="Haz clic para ver modelos y fotos de Industrial">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp" alt="Bragas petroleras y dotación industrial reflectiva" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Bragas petroleras y dotación industrial reflectiva" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('ind')" aria-label="Ver detalles y modelos de Industrial">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Industrial</span>
-              <h4>Bragas Petroleras & Chaquetas Reflectivas 3M</h4>
+              <h3>Bragas Petroleras & Chaquetas Reflectivas 3M</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -767,14 +787,14 @@
         <!-- Tarjeta 3: Salud -->
         <div class="gallery-card" data-gallery-id="med">
           <div class="gallery-photo-box" onclick="openGalleryModal('med')" title="Haz clic para ver modelos y fotos de Salud">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp" alt="Scrubs médicos ergonómicos antifluido" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Scrubs médicos ergonómicos antifluido" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('med')" aria-label="Ver detalles y modelos de Salud">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Salud</span>
-              <h4>Conjuntos de Scrubs Quirúrgicos Antifluido</h4>
+              <h3>Conjuntos de Scrubs Quirúrgicos Antifluido</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -788,14 +808,14 @@
         <!-- Tarjeta 4: Gastronomía -->
         <div class="gallery-card" data-gallery-id="chef">
           <div class="gallery-photo-box" onclick="openGalleryModal('chef')" title="Haz clic para ver modelos y fotos de Gastronomía">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp" alt="Filipinas de chef y delantales barista" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Filipinas de chef y delantales barista" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('chef')" aria-label="Ver detalles y modelos de Gastronomía">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Gastronomía</span>
-              <h4>Filipinas de Chef & Delantales en Lona</h4>
+              <h3>Filipinas de Chef & Delantales en Lona</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -809,14 +829,14 @@
         <!-- Tarjeta 5: Deportivo -->
         <div class="gallery-card" data-gallery-id="dep">
           <div class="gallery-photo-box" onclick="openGalleryModal('dep')" title="Haz clic para ver modelos y fotos de Deportivo">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.webp" alt="Franelas dry fit y cortavientos deportivos" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Franelas dry fit y cortavientos deportivos" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('dep')" aria-label="Ver detalles y modelos de Deportivo">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Deportivo</span>
-              <h4>Franelas Técnicas Dry-Fit & Cortavientos</h4>
+              <h3>Franelas Técnicas Dry-Fit & Cortavientos</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -830,14 +850,14 @@
         <!-- Tarjeta 6: Merchandising & POP -->
         <div class="gallery-card" data-gallery-id="pop">
           <div class="gallery-photo-box" onclick="openGalleryModal('pop')" title="Haz clic para ver modelos y fotos de Merchandising">
-            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.webp" alt="Gorras bordadas y tote bags corporativas" loading="lazy" decoding="async">
+            <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card-640.webp" srcset="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card-640.webp 640w, /assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.webp 1200w" sizes="(max-width: 768px) 92vw, 400px" alt="Gorras bordadas y tote bags corporativas" width="1200" height="837" loading="lazy" decoding="async">
             <button type="button" class="gallery-zoom-btn" onclick="event.stopPropagation(); openGalleryModal('pop')" aria-label="Ver detalles y modelos de Merchandising">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
               <span>Ver detalles</span>
             </button>
             <div class="gallery-photo-info">
               <span class="gallery-cat">Merchandising</span>
-              <h4>Gorras Estructuradas & Bolsas Ecológicas</h4>
+              <h3>Gorras Estructuradas & Bolsas Ecológicas</h3>
             </div>
           </div>
           <div class="gallery-card-footer">
@@ -874,7 +894,7 @@
           </button>
 
           <div class="slider-image-stage">
-            <img src="/assets/images/uniforme_corporativo.jpg" alt="Foto del modelo textil" id="gModalImg" class="slider-main-photo">
+            <img alt="Foto del modelo textil" id="gModalImg" class="slider-main-photo">
             <div class="slider-photo-caption" id="gModalCaption">
               <span>Chemise Corporativa Piqué Premium con Bordado Computarizado</span>
             </div>
@@ -1238,13 +1258,13 @@
       <div class="quote-layout">
         <!-- Visual Lateral (Banner Influenciador Persuasivo) -->
         <div class="quote-visual-card" id="quoteVisualCard">
-          <img src="/assets/images/form_showcase.webp" alt="Confección y prendas Upernikao" class="visual-img" loading="lazy" decoding="async">
+          <img src="/assets/images/form_showcase.webp" alt="Confección y prendas Upernikao" class="visual-img" width="800" height="533" loading="lazy" decoding="async">
           <div class="visual-overlay"></div>
           <div class="visual-content">
             <!-- Barra Superior del Banner: Logo en Fondo Blanco en la Esquina -->
             <div class="visual-top-bar">
               <div class="visual-brand-badge" title="Upernikao Textil">
-                <img src="/favicon.png" alt="Upernikao Textil Icono" class="visual-brand-icon">
+                <img src="/favicon.png" alt="Upernikao Textil Icono" class="visual-brand-icon" width="232" height="256" loading="lazy">
               </div>
               <div class="visual-badge-pill">
                 <span class="badge-dot"></span>
@@ -1663,7 +1683,7 @@
         <!-- Columna 1: Identidad de Marca -->
         <div class="footer-brand-col">
           <a href="#hero" class="footer-logo-link" aria-label="Upernikao Textil Inicio">
-            <img src="/assets/images/UT-FOOTER-clean.webp" alt="Upernikao Textil" class="footer-logo" loading="lazy" decoding="async" width="220" height="38">
+            <img src="/assets/images/logo-footer.webp" alt="Upernikao Textil" class="footer-logo" loading="lazy" decoding="async" width="220" height="38">
           </a>
           <p class="footer-bio">
             Confección textil de alta gama para empresas e instituciones. Diseñamos soluciones de vestir que combinan comodidad, resistencia y distinción visual en toda Venezuela.
@@ -1682,7 +1702,7 @@
 
         <!-- Columna 2: Líneas de Confección -->
         <div class="footer-links-col">
-          <h4 class="footer-heading">Líneas de Dotación</h4>
+          <h3 class="footer-heading">Líneas de Dotación</h3>
           <ul>
             <li><a href="#cotizacion" onclick="preselectProduct('Camisería & Pantalones')">Línea Corporativa & Ejecutiva</a></li>
             <li><a href="#cotizacion" onclick="preselectProduct('Uniformes Industriales')">Línea Industrial & Faena</a></li>
@@ -1695,7 +1715,7 @@
 
         <!-- Columna 3: Técnicas y Empresa -->
         <div class="footer-links-col">
-          <h4 class="footer-heading">Empresa & Servicios</h4>
+          <h3 class="footer-heading">Empresa & Servicios</h3>
           <ul>
             <li><a href="#nosotros">Sobre Upernikao Textil</a></li>
             <li><a href="#tecnicas">Bordado Computarizado</a></li>
@@ -1708,7 +1728,7 @@
 
         <!-- Columna 4: Horario y Asesoría -->
         <div class="footer-cta-col">
-          <h4 class="footer-heading">Atención y Asesoría</h4>
+          <h3 class="footer-heading">Atención y Asesoría</h3>
           <p class="service-hours">
             <strong>Lunes a Viernes:</strong> 8:00 AM - 5:30 PM<br>
             <strong>Sábados:</strong> 8:30 AM - 1:00 PM<br>
@@ -1759,7 +1779,7 @@
       <div class="wa-modal-screen" id="waFormScreen">
         <div class="wa-modal-header">
           <div class="wa-modal-icon-badge">
-            <img src="/assets/images/logo_icono_blanco.webp" alt="Upernikao Textil" class="wa-modal-logo-img" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/images/bio-icono-blanco.webp" alt="Upernikao Textil" class="wa-modal-logo-img" width="48" height="48" loading="lazy" decoding="async">
           </div>
           <div class="wa-modal-title-wrap">
             <span class="wa-modal-tag">ATENCIÓN DIRECTA</span>
@@ -1908,15 +1928,6 @@
   </div>
 
   <!-- Script Principal -->
-  <script src="/assets/js/main.js?v=4.9"></script>
-  <!-- GoHighLevel External Tracking (carga diferida para no afectar la velocidad de carga) -->
-  <script>
-    window.addEventListener('load', function () {
-      var s = document.createElement('script');
-      s.src = 'https://link.msgsndr.com/js/external-tracking.js';
-      s.setAttribute('data-tracking-id', 'tk_d8b2731dfa70425abd0852270cc25f73');
-      document.body.appendChild(s);
-    });
-  </script>
+  <script src="/assets/js/main.js?v=5.0"></script>
 </body>
 </html>

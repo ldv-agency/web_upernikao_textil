@@ -19,6 +19,7 @@
   --card: #FFFFFF;
   --border-subtle: #EEE2E6;
   --wa-green: #25D366;
+  --wa-green-text: #157A3E;
   --wa-green-hover: #1EBE5D;
   --radius-card: 18px;
   --radius-btn: 14px;
@@ -284,13 +285,14 @@ body {
 }
 
 .btn-whatsapp {
-  background-color: var(--wa-green);
+  /* Verde WhatsApp oscurecido para que el texto blanco cumpla contraste AA */
+  background-color: var(--wa-green-text);
   color: #FFFFFF;
   box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
 }
 
 .btn-whatsapp:hover, .btn-whatsapp:active {
-  background-color: var(--wa-green-hover);
+  background-color: #11652F;
   transform: translateY(-2px);
 }
 

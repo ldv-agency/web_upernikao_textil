@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) - GA4 Upernikao Textil -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-16TZ6MRVCK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-16TZ6MRVCK');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Upernikao Textil | Enlaces oficiales · Uniformes y confección</title>
@@ -25,23 +16,50 @@
   <meta property="og:url" content="https://upernikaotextil.com/bio">
   <meta property="og:title" content="Upernikao Textil | Uniformes y confección para empresas">
   <meta property="og:description" content="Cotiza tu dotación, mira el catálogo y escríbenos por WhatsApp. Pedidos desde 12 piezas, envíos a toda Venezuela.">
-  <meta property="og:image" content="https://upernikaotextil.com/assets/images/hero_textil_bg.jpg">
+  <meta property="og:image" content="https://upernikaotextil.com/assets/images/og-upernikao.jpg">
   <meta property="og:locale" content="es_VE">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/bio.css?v=1.0">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/bio.css?v=1.1">
 
-  <!-- Meta Pixel (Upernikao Textil) -->
+  <!-- GA4 + Meta Pixel: las funciones existen desde el inicio (los eventos quedan en cola) y las
+       librerías se descargan al primer gesto del usuario o a los 3,5 s, para no bloquear el celular. -->
   <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-16TZ6MRVCK');
+
+    !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
     fbq('init', '2326778011482948');
     fbq('track', 'PageView');
+
+    (function () {
+      var loaded = false;
+      function addScript(src, attrs) {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        for (var k in (attrs || {})) s.setAttribute(k, attrs[k]);
+        document.head.appendChild(s);
+      }
+      function loadTags() {
+        if (loaded) return;
+        loaded = true;
+        addScript('https://www.googletagmanager.com/gtag/js?id=G-16TZ6MRVCK');
+        addScript('https://connect.facebook.net/en_US/fbevents.js');
+        addScript('https://link.msgsndr.com/js/external-tracking.js', { 'data-tracking-id': 'tk_d8b2731dfa70425abd0852270cc25f73' });
+      }
+      ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'].forEach(function (ev) {
+        window.addEventListener(ev, loadTags, { once: true, passive: true });
+      });
+      window.addEventListener('load', function () { setTimeout(loadTags, 3500); });
+    })();
   </script>
 </head>
 <body>
@@ -170,7 +188,7 @@
           <div class="content-inner">
             <div class="item-list">
               <a href="/cotizar/corporativa" class="list-item" data-track="linea_corporativa">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Corporativa & Ejecutiva</span>
                   <span class="list-sub">Camisas Oxford, pantalones de vestir, chemises</span>
@@ -178,7 +196,7 @@
                 <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <a href="/cotizar/industrial" class="list-item" data-track="linea_industrial">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Industrial & Seguridad</span>
                   <span class="list-sub">Bragas petroleras, chaquetas reflectivas</span>
@@ -186,7 +204,7 @@
                 <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <a href="/cotizar/medica" class="list-item" data-track="linea_medica">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Médica & Salud</span>
                   <span class="list-sub">Scrubs y batas antifluido</span>
@@ -194,7 +212,7 @@
                 <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <a href="/cotizar/gastronomica" class="list-item" data-track="linea_gastronomica">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Gastronómica & Hotelería</span>
                   <span class="list-sub">Filipinas de chef, delantales, gorros</span>
@@ -202,7 +220,7 @@
                 <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <a href="/cotizar/deportiva" class="list-item" data-track="linea_deportiva">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineadeportiva-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Deportiva & Cortavientos</span>
                   <span class="list-sub">Dry fit, conjuntos y chaquetas</span>
@@ -210,7 +228,7 @@
                 <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
               <a href="/cotizar/pop" class="list-item" data-track="linea_pop">
-                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-card.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
+                <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineapop-thumb.webp" alt="" class="list-thumb" width="56" height="56" loading="lazy">
                 <div class="list-info">
                   <span class="list-title">Material POP & Merchandising</span>
                   <span class="list-sub">Gorras bordadas, franelas, tote bags</span>
@@ -325,10 +343,10 @@
         <div class="accordion-content" id="content-galeria">
           <div class="content-inner">
             <div class="gallery-grid">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card.webp" alt="Uniformes corporativos Upernikao Textil" loading="lazy" width="1200" height="837">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card.webp" alt="Dotación industrial Upernikao Textil" loading="lazy" width="1200" height="837">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card.webp" alt="Uniformes médicos Upernikao Textil" loading="lazy" width="1200" height="837">
-              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card.webp" alt="Uniformes gastronómicos Upernikao Textil" loading="lazy" width="1200" height="837">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineacorporativa-card-640.webp" alt="Uniformes corporativos Upernikao Textil" loading="lazy" width="1200" height="837">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineaindustrial-card-640.webp" alt="Dotación industrial Upernikao Textil" loading="lazy" width="1200" height="837">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineamedica-card-640.webp" alt="Uniformes médicos Upernikao Textil" loading="lazy" width="1200" height="837">
+              <img src="/assets/images/barcelona-anzoategui-upernikao-textil-lineagastronomica-card-640.webp" alt="Uniformes gastronómicos Upernikao Textil" loading="lazy" width="1200" height="837">
             </div>
             <a href="/#galeria" class="btn-card-outline" data-track="ver_galeria">
               <span>Ver galería completa</span>
@@ -445,16 +463,7 @@
 
   </main>
 
-  <script src="/assets/js/bio.js?v=1.0"></script>
+  <script src="/assets/js/bio.js?v=1.1"></script>
 
-  <!-- GoHighLevel External Tracking (carga diferida para no afectar la velocidad de carga) -->
-  <script>
-    window.addEventListener('load', function () {
-      var s = document.createElement('script');
-      s.src = 'https://link.msgsndr.com/js/external-tracking.js';
-      s.setAttribute('data-tracking-id', 'tk_d8b2731dfa70425abd0852270cc25f73');
-      document.body.appendChild(s);
-    });
-  </script>
 </body>
 </html>
